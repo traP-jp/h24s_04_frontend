@@ -13,7 +13,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: .tool-versions
           cache: npm
       - run: npm ci
   build:
@@ -22,7 +22,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: .tool-versions
           cache: npm
       - run: npm ci
       - run: npm run build
@@ -32,7 +32,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: .tool-versions
           cache: npm
       - run: npm ci
       - run: npm run lint:nofix
@@ -42,7 +42,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: .tool-versions
           cache: npm
       - run: npm ci
       - run: npm run format:nofix
@@ -52,7 +52,7 @@ jobs:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
-          node-version-file: .node-version
+          node-version-file: .tool-versions
           cache: npm
       - run: npm ci
       - run: npm run type-check
