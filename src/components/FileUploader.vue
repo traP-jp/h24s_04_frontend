@@ -1,12 +1,9 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import { useDropzone } from 'vue3-dropzone'
-import type { FileRejectReason } from 'vue3-dropzone'
 import AIcon from '@/components/AIcon.vue'
 
-function onDrop(acceptedFiles: File[], rejectReasons: FileRejectReason[]) {
-  console.log('acceptedFiles', acceptedFiles)
-  console.log('rejectReasons', rejectReasons)
+function onDrop(acceptedFiles: File[]) {
   const file = acceptedFiles[0]
   model.value = file
 }
@@ -17,8 +14,7 @@ const options = reactive({
   accept: '.pdf'
 })
 
-const { getRootProps, getInputProps, isDragActive, isFocused, isDragReject, open } =
-  useDropzone(options)
+const { getRootProps, getInputProps } = useDropzone(options)
 
 const model = defineModel<File>({ required: true })
 </script>

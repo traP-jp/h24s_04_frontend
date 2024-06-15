@@ -7,10 +7,11 @@ import type { Genre } from '@/features/genres/type'
 import AButton from '@/components/AButton.vue'
 import SlideViewer from '@/components/SlideViewer.vue'
 import type { SlideEditRequest } from '@/features/slideDetail/type'
-import { ref } from 'vue'
+import { reactive, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
+import { useDropzone } from 'vue3-dropzone'
 
 const route = useRoute()
 const router = useRouter()
@@ -47,6 +48,25 @@ const handleDelete = async () => {
   await deleteSlideDetail(id)
   router.push('/')
 }
+
+const newFile = ref<File | null>(null)
+const onDrop = (acceptedFiles: File[]) => {
+  const file = acceptedFiles[0]
+  newFile.value = file
+}
+
+const options = reactive({
+  multiple: false,
+  onDrop,
+  accept: '.pdf'
+})
+
+const { getRootProps, getInputProps, open } = useDropzone(options)
+
+const handleUpload = async () => {
+  open()
+  // アップロードタイミング要検討
+}
 </script>
 
 <template>
@@ -60,7 +80,7 @@ const handleDelete = async () => {
             <span>ダウンロード</span>
             <a-icon name="mdi:tray-arrow-down" />
           </a>
-          <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドを編集</a-button>
+          <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドの情報を編集</a-button>
           <a-button iconName="mdi:delete" danger @click="handleDelete">スライドを削除</a-button>
         </template>
         <template v-else>
@@ -96,6 +116,14 @@ const handleDelete = async () => {
       </div>
     </div>
     <div :class="$style.slideViewer">
+      <div :class="$style.uploadButtonContainer">
+        <div v-bind="getRootProps()">
+          <input v-bind="getInputProps()" />
+          <a-button @click="handleUpload" iconName="mdi:tray-arrow-up">
+            スライドの再アップロード
+          </a-button>
+        </div>
+      </div>
       <SlideViewer :slide-id="slide.id" :thumbnail="slide.thumb_url" />
     </div>
   </div>
@@ -191,5 +219,9 @@ const handleDelete = async () => {
       background-color: #e3a1a1;
     }
   }
+}
+.uploadButtonContainer {
+  display: flex;
+  justify-content: flex-end;
 }
 </style>
