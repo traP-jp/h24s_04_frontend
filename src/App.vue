@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import './globalStyle.scss'
 import { RouterView } from 'vue-router'
+import TheHeader from '@/components/TheHeader.vue'
 </script>
 
 <template>
-  <header>header</header>
+  <TheHeader />
   <main>
     <router-view v-slot="{ Component }">
       <template v-if="Component">
