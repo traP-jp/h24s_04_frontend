@@ -25,7 +25,7 @@ const handleRegisterSlide = async () => {
 <template>
   <div>
     <File-uploader v-model="newFile" />
-    <div :class="[$style.gap,$style.left]">
+    <div :class="[$style.gap, $style.left]">
       <label :class="$style.container">
         タイトル
         <input :class="$style.border" v-model="newTitle" type="text" />
@@ -46,7 +46,7 @@ const handleRegisterSlide = async () => {
         </v-select>
       </label>
       <dev :class="$style.moreleft">
-      <button @click="handleRegisterSlide" :class="$style.button">スライドを登録</button>
+        <button @click="handleRegisterSlide" :class="$style.button">スライドを登録</button>
       </dev>
     </div>
   </div>
