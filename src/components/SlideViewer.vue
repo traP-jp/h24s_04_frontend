@@ -15,8 +15,8 @@ const currentSlideNum = ref(1)
   <div :class="$style.container">
     <div :class="$style.viewer">
       <div :class="$style.buttonContainer" data-direction="left">
-        <button :class="$style.button" @click="currentSlideNum++" v-if="currentSlideNum !== 1">
-          <a-icon name="mdi:arrow-left-drop-circle-outline" :size="48" />
+        <button :class="$style.button" @click="currentSlideNum--" v-if="currentSlideNum !== 1">
+          <a-icon name="mdi:arrow-left-circle" :size="48" />
         </button>
       </div>
       <VuePDF :pdf="pdf" :page="currentSlideNum">
@@ -24,7 +24,7 @@ const currentSlideNum = ref(1)
       </VuePDF>
       <div :class="$style.buttonContainer" data-direction="right">
         <button :class="$style.button" @click="currentSlideNum++" v-if="currentSlideNum !== pages">
-          <a-icon name="mdi:arrow-right-drop-circle-outline" :size="48" />
+          <a-icon name="mdi:arrow-right-circle" :size="48" />
         </button>
       </div>
     </div>
