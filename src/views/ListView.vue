@@ -7,6 +7,9 @@ interface Data{
     genre: string
 }
 
+const test = () => {
+}
+
 const datalist = ref<Data[]>([
     {   
         title: 'slide1sssssssssssssssssssssssssssssssssss',
@@ -35,8 +38,12 @@ const datalist = ref<Data[]>([
     <div>
         <h1 :class="$style.toptitle">スライド一覧</h1>
     </div>
-    <div>
-        <!-- <p>登録日で昇順ソート</p> -->
+    <div :class="$style.search">
+        <div><select :class="$style.search_genre">
+            <option value="" selected>ジャンルを選択</option>
+        </select></div>
+        <div><input type="text" placeholder="タイトルで検索" :class="$style.search_title"/></div>
+        <div><button @click="test" :class="$style.sort">登録日で昇順ソート</button></div>
     </div>
     <ul :class='$style.container'>
         <li v-for="data in datalist" :key="data.title" :class="$style.slide">
@@ -107,6 +114,45 @@ const datalist = ref<Data[]>([
     .genre {
         font-size: 16px;
         color: #000000;
+    }
+    .search {
+        display:flex;
+        flex-direction: row-reverse;
+        gap: 24px;
+        align-items: baseline;
+    }
+    .sort {
+        font-size: 16px;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        width:172px;
+        height: 24px;
+        border-radius: 4px;
+        border-width:0px;
+        background: #ffffff;        
+    }
+    .sort:focus,.sort:hover {
+        background-color: #ececec;
+    }
+    .sort:active {
+        background-color: #ffffff;
+    }
+    .search_title {
+        width: 184px;
+        height: 43px;
+        font-size: 16px;
+        border-width: 1px;
+        border-radius: 8px;
+        padding-left: 12px;
+    }
+    .search_genre {
+        width: 188px;
+        height: 43px;
+        font-size: 16px;
+        border-radius: 8px;
+        color: #8d8d8d;
+        padding-left: 12px;
     }
 
 </style>
