@@ -1,17 +1,32 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import vSelect from 'vue-select'
-import SlideList from '../components/SlideList.vue'
+import SlideList from '@/components/SlideList.vue'
+import AIcon from '@/components/AIcon.vue'
 import 'vue-select/dist/vue-select.css'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
+export type SortType="asc"|"desc"
+
+const ascStr = "登録日で昇順ソート"
+const descStr = "登録日で降順ソート"
 const genres = await fetchGenres()
 
-const selectedGenre = ref(null)
+const selectedGenre = ref<string|null>(null)
 const selectedTitle = ref('')
+const sort = ref<SortType>("desc")
+const sortStr = ref(ascStr)
 
-const test = () => {}
+const changeSort = () => {
+    if(sort.value === "asc"){
+        sort.value = "desc"
+        sortStr.value = ascStr
+    } else {
+        sort.value = "asc"
+        sortStr.value = descStr
+    }
+}
 </script>
 
 <template>
@@ -30,9 +45,12 @@ const test = () => {}
         </v-select>
       </div>
       <div><input type="text" v-model="selectedTitle" placeholder="タイトルで検索" :class="$style.search_title" /></div>
-      <div><button @click="test" :class="$style.sort">登録日で昇順ソート</button></div>
+      <div><button @click="changeSort" :class="$style.sort">{{ sortStr }}
+        <div v-if="sortStr === ascStr"><a-icon name="mdi:sort-ascending" /></div>
+        <div v-if="sortStr === descStr"><a-icon name="mdi:sort-descending" /></div>
+      </button></div>
     </div>
-    <SlideList />
+    <SlideList :key="[selectedTitle,selectedGenre,sort].join()" :selectedTitle="selectedTitle" :selectedGenre="selectedGenre" :sort="sort"/>
   </div>
 </template>
 
@@ -124,7 +142,7 @@ const test = () => {}
 }
 .search_title {
   width: 184px;
-  height: 43px;
+  height: 35px;
   font-size: 16px;
   border-width: 1px;
   border-radius: 8px;

@@ -1,7 +1,9 @@
 import type { Slide } from './type'
+import type{ SortType } from '@/views/ListView.vue'
 import ky from 'ky'
 
-export const fetchSlide = async () => {
+export const fetchSlide = async (selectedTitle: string, selectedGenre: string | null, sort: SortType) => {
+  console.log(selectedTitle, selectedGenre)
   const datalist: Slide[] = [
     {
       id: '1',
@@ -40,8 +42,17 @@ export const fetchSlide = async () => {
       description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     }
   ]
+
+
+  const params = new URLSearchParams()
+  params.append('sort', sort)
+  params.append('title', selectedTitle)
+  if (selectedGenre !== null) {
+    params.append('genre_id', selectedGenre)
+  }
+  
   return datalist
 
-  const res: Slide[] = await ky.get(`/slides`).json()
+  const res: Slide[] = await ky.get(`/slides`, { searchParams: params }).json()
   return res
 }

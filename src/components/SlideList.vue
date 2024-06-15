@@ -5,8 +5,14 @@ import 'vue-select/dist/vue-select.css'
 import { fetchSlide } from '@/features/list/api'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
+import type{ SortType } from '@/views/ListView.vue'
 
-const datalist = await fetchSlide()
+const props = defineProps<{
+    selectedTitle: string
+    selectedGenre: string|null
+    sort: SortType
+  }>()
+const datalist = await fetchSlide(props.selectedTitle, props.selectedGenre, props.sort)
 const genres = await fetchGenres()
 
 const idToGenre = (id: string) => {
