@@ -9,13 +9,13 @@ interface Data{
 
 const datalist = ref<Data[]>([
     {   
-        title: 'slide1',
+        title: 'slide1sssssssssssssssssssssssssssssssssss',
         description: 'test1',
         genre: 'hackathon'
     },
     {
         title:'slide2',
-        description: 'test2test2test2test2test2test2test2test2',
+        description: 'test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2tesetttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt',
         genre: 'hackathon'
     },
     {
@@ -33,7 +33,10 @@ const datalist = ref<Data[]>([
 
 <template>
     <div>
-        <h1>スライド一覧</h1>
+        <h1 :class="$style.toptitle">スライド一覧</h1>
+    </div>
+    <div>
+        <!-- <p>登録日で昇順ソート</p> -->
     </div>
     <ul :class='$style.container'>
         <li v-for="data in datalist" :key="data.title" :class="$style.slide">
@@ -51,6 +54,9 @@ const datalist = ref<Data[]>([
 </template>
 
 <style lang="scss" module>
+    .toptitle {
+        font-size: 24px;
+    }
     .container {
         display: flex;
         flex-direction: row;
@@ -83,10 +89,17 @@ const datalist = ref<Data[]>([
         gap: 4px;
     }
     .title {
+        white-space: nowrap; 
+        overflow: hidden; 
+        text-overflow: ellipsis; 
         font-size: 20px;
         color: #000000;
     }
     .desc {
+        display: -webkit-box; 
+        -webkit-box-orient: vertical; 
+        -webkit-line-clamp: 3; 
+        overflow: hidden; 
         font-size: 16px;
         color: #8d8d8d;
         word-break: break-all;
