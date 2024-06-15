@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import './globalStyle.css'
 import { RouterView } from 'vue-router'
 </script>
 
