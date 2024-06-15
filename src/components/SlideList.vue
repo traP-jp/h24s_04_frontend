@@ -2,6 +2,7 @@
 // import { ref, computed } from 'vue'
 // import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
+import AIcon from '@/components/AIcon.vue'
 import { fetchSlide } from '@/features/list/api'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
@@ -35,7 +36,10 @@ const idToGenre = (id: string) => {
           <div :class="$style.title">{{ data.title }}</div>
           <div :class="$style.desc">{{ data.description }}</div>
         </div>
-        <div :class="$style.genre">{{ idToGenre(data.genre_id) }}</div>
+        <div :class="$style.genre">
+          <a-icon name="mdi:label" />
+          {{ idToGenre(data.genre_id) }}
+        </div>
       </div>
     </li>
   </ul>
@@ -92,7 +96,9 @@ const idToGenre = (id: string) => {
   word-break: break-all;
 }
 .genre {
+  display: flex;
   font-size: 16px;
   color: #000000;
+  gap: 4px;
 }
 </style>
