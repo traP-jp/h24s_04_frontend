@@ -6,6 +6,7 @@ import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 import FileUploader from '@/components/FileUploader.vue'
 import { registerSlide } from '@/features/sendButton/api'
+import SlideViewer from '@/components/SlideViewer.vue'
 
 const genres = await fetchGenres()
 
@@ -13,6 +14,7 @@ const selectedGenre = ref(null)
 const newTitle = ref('')
 const newExplanation = ref('')
 const newFile = ref<File | null>(null)
+const url = ref('')
 
 const handleRegisterSlide = async () => {
   if (selectedGenre.value === null || newFile.value === null) {
@@ -24,7 +26,8 @@ const handleRegisterSlide = async () => {
 
 <template>
   <div :class="$style.page">
-    <File-uploader v-model="newFile" />
+    <File-uploader v-model:file="newFile" v-model:url="url" />
+    <SlideViewer v-if="url !== ''" :slideUrl="url" />
     <div :class="[$style.gap, $style.left]">
       <label :class="$style.container">
         タイトル
