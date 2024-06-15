@@ -3,8 +3,13 @@ import { VuePDF, usePDF } from '@tato30/vue-pdf'
 import { ref } from 'vue'
 import AIcon from '@/components/AIcon.vue'
 
+defineProps<{
+  slideId: string
+  thumbnail: string
+}>()
+
 const { pdf, pages } = usePDF({
-  url: '/slide.pdf',
+  url: '/slide.pdf', // slideIdからURL生成？
   cMapUrl: '/cmaps/'
 })
 
@@ -19,8 +24,14 @@ const currentSlideNum = ref(1)
           <a-icon name="mdi:arrow-left-circle" :size="48" />
         </button>
       </div>
-      <VuePDF :pdf="pdf" :page="currentSlideNum">
-        <div>Loading...</div>
+      <VuePDF :width="841" :height="595" :pdf="pdf" :page="currentSlideNum">
+        <img
+          v-if="currentSlideNum === 1"
+          :width="841"
+          :height="595"
+          alt="1ページ目"
+          :src="thumbnail"
+        />
       </VuePDF>
       <div :class="$style.buttonContainer" data-direction="right">
         <button :class="$style.button" @click="currentSlideNum++" v-if="currentSlideNum !== pages">
