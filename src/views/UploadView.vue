@@ -51,6 +51,7 @@ const newExplanation = ref('')
 }
 .border {
   border-radius: 6px;
+  border: 1px solid #000000;
 }
 .height {
   display: flex;
