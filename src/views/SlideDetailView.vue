@@ -64,7 +64,7 @@ const options = reactive({
 const { getRootProps, getInputProps, open } = useDropzone(options)
 
 const handleUpload = async () => {
-  open()
+  open?.()
   // アップロードタイミング要検討
 }
 </script>
