@@ -21,16 +21,16 @@ const model = defineModel<File>({ required: true })
 
 <template>
   <div :class="[$style.space, $style.left]">
-    <label :class="$style.word">
-      スライドの登録
+    <div :class="$style.word">
+      <label for="upload">スライドの登録</label>
       <div v-bind="getRootProps()" :class="[$style.cursor, $style.box]">
-        <input v-bind="getInputProps()" />
+        <input v-bind="getInputProps()" id="upload" />
         <div>
           <a-icon name="mdi:tray-arrow-up" :class="$style.icon" />
           <p>アップロード</p>
         </div>
       </div>
-    </label>
+    </div>
   </div>
 </template>
 
