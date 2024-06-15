@@ -11,6 +11,9 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  build: {
+    target: ['es2022', 'edge89', 'firefox89', 'chrome89', 'safari15']
+  },
   optimizeDeps: {
     esbuildOptions: {
       target: 'es2022'
