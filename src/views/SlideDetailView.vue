@@ -5,6 +5,7 @@ import AIcon from '@/components/AIcon.vue'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 import AButton from '@/components/AButton.vue'
+import SlideViewer from '@/components/SlideViewer.vue'
 
 const slide = await fetchSlideDetail('1')
 const genres = await fetchGenres()
@@ -40,6 +41,9 @@ const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
           {{ genre.name }}
         </div>
       </div>
+    </div>
+    <div :class="$style.slideViewer">
+      <SlideViewer />
     </div>
   </div>
 </template>
@@ -86,5 +90,9 @@ const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
   display: flex;
   align-items: center;
   gap: 4px;
+}
+.slideViewer {
+  width: fit-content;
+  margin: 0 auto;
 }
 </style>
