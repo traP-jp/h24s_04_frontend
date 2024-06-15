@@ -25,7 +25,7 @@ const handleRegisterSlide = async () => {
 <template>
   <div>
     <File-uploader v-model="newFile" />
-    <div :class="$style.gap">
+    <div :class="[$style.gap,$style.left]">
       <label :class="$style.container">
         タイトル
         <input :class="$style.border" v-model="newTitle" type="text" />
@@ -34,7 +34,7 @@ const handleRegisterSlide = async () => {
         説明
         <textarea :class="[$style.height, $style.border]" v-model="newExplanation" type="text" />
       </label>
-      <label :class="$style.container">
+      <label :class="[$style.container]">
         ジャンル
         <v-select
           :options="genres"
@@ -45,7 +45,9 @@ const handleRegisterSlide = async () => {
         >
         </v-select>
       </label>
-      <button @click="handleRegisterSlide">スライドを登録</button>
+      <dev :class="$style.moreleft">
+      <button @click="handleRegisterSlide" :class="$style.button">スライドを登録</button>
+      </dev>
     </div>
   </div>
 </template>
@@ -64,10 +66,27 @@ const handleRegisterSlide = async () => {
 .border {
   border-radius: 6px;
   border: 1px solid #000000;
+  width: 600px;
 }
 .height {
   display: flex;
   flex-direction: column;
   height: 120px;
+}
+.genre {
+  padding-bottom: 28px;
+}
+.button {
+  border: 1px solid #000000;
+  width: 152px;
+  height: 47px;
+  background-color: #d9d9d9;
+  border-radius: 12px;
+}
+.left {
+  padding-left: 80px;
+}
+.moreleft {
+  padding-left: 888px;
 }
 </style>

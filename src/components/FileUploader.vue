@@ -24,7 +24,7 @@ const model = defineModel<File>({ required: true })
 </script>
 
 <template>
-  <div :class="$style.space">
+  <div :class="[$style.space,$style.left]">
     <label :class="$style.word">
       スライドの登録
       <div v-bind="getRootProps()" :class="[$style.cursor, $style.box]">
@@ -64,5 +64,8 @@ const model = defineModel<File>({ required: true })
 }
 .space {
   padding-bottom: 20px;
+}
+.left {
+  padding-left: 80px;
 }
 </style>
