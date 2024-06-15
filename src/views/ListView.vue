@@ -1,5 +1,7 @@
 <script setup lang="ts">
-//import { ref, computed } from 'vue'
+import { ref, computed } from 'vue'
+import vSelect from 'vue-select'
+import 'vue-select/dist/vue-select.css'
 import { fetchSlide } from '@/features/list/api'
 import type { Slide } from '@/features/list/type'
 import { fetchGenres } from '@/features/genres/api'
@@ -7,6 +9,7 @@ import type { Genre } from '@/features/genres/type'
 
 const datalist = await fetchSlide()
 const genres = await fetchGenres()
+const selectedGenre = ref(null)
 
 const idToGenre = (slide: Slide) => {
   const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
@@ -22,14 +25,18 @@ const test = () => {}
 <template>
   <div :class="$style.page">
     <h1 :class="$style.toptitle">スライド一覧</h1>
-    <div>
-      <!-- <p>登録日で昇順ソート</p> -->
-    </div>
     <div :class="$style.search">
       <div>
-        <select :class="$style.search_genre">
-          <option value="" selected>ジャンルを選択</option>
-        </select>
+        <v-select
+          :options="genres"
+          v-model="selectedGenre"
+          label="name"
+          placeholder="ジャンルを選択"
+          :reduce="(option: Genre) => option.id"
+          :class="$style.search_genre"
+        >
+
+        </v-select>
       </div>
       <div><input type="text" placeholder="タイトルで検索" :class="$style.search_title" /></div>
       <div><button @click="test" :class="$style.sort">登録日で昇順ソート</button></div>
@@ -126,12 +133,11 @@ const test = () => {}
   justify-content: center;
   align-items: center;
   width: 172px;
-  height: 24px;
+  height: 30px;
   border-radius: 4px;
-  border-width: 0px;
+  border: 1px dotted;
   background: #ffffff;
 }
-.sort:focus,
 .sort:hover {
   background-color: #ececec;
 }
@@ -145,6 +151,7 @@ const test = () => {}
   border-width: 1px;
   border-radius: 8px;
   padding-left: 12px;
+  border: 1px solid;
 }
 .search_genre {
   width: 188px;
