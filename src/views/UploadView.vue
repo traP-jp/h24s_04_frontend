@@ -14,7 +14,7 @@ const selectedGenre = ref(null)
 const newTitle = ref('')
 const newExplanation = ref('')
 const newFile = ref<File | null>(null)
-const url =ref("")
+const url = ref('')
 
 const handleRegisterSlide = async () => {
   if (selectedGenre.value === null || newFile.value === null) {
@@ -22,13 +22,12 @@ const handleRegisterSlide = async () => {
   }
   await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
 }
-
 </script>
 
 <template>
   <div>
-    <File-uploader v-model:file="newFile" v-model:url="url"  />
-    <SlideViewer v-if="url!==''" :slideUrl="url" />
+    <File-uploader v-model:file="newFile" v-model:url="url" />
+    <SlideViewer v-if="url !== ''" :slideUrl="url" />
     <div :class="[$style.gap, $style.left]">
       <label :class="$style.container">
         タイトル

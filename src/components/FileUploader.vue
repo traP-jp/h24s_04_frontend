@@ -6,8 +6,8 @@ import AIcon from '@/components/AIcon.vue'
 function onDrop(acceptedFiles: File[]) {
   const file = acceptedFiles[0]
   fileModel.value = file
-  const url =URL.createObjectURL(file)
-  urlModel.value=url
+  const url = URL.createObjectURL(file)
+  urlModel.value = url
 }
 
 const options = reactive({
@@ -18,8 +18,8 @@ const options = reactive({
 
 const { getRootProps, getInputProps } = useDropzone(options)
 
-const fileModel = defineModel<File|null>('file',{ required: true })
-const urlModel = defineModel<string>('url',{ required: true })
+const fileModel = defineModel<File | null>('file', { required: true })
+const urlModel = defineModel<string>('url', { required: true })
 </script>
 
 <template>
