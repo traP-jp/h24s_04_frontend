@@ -1,4 +1,3 @@
-
 import ky from 'ky'
 
 export const registerSlide = async (
@@ -14,5 +13,5 @@ export const registerSlide = async (
   formData.append('genre_id', selectedGenre)
   formData.append('pdf', file)
 
-   await ky.post('/slides').json()
+  await ky.post('/slides').json()
 }
