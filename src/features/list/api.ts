@@ -1,3 +1,4 @@
+import { sleep } from '@/lib/mockUtils'
 import type { Slide } from './type'
 import type { SortType } from '@/views/ListView.vue'
 import ky from 'ky'
@@ -7,7 +8,9 @@ export const fetchSlide = async (
   selectedGenre: string | null,
   sort: SortType
 ) => {
+  await sleep(1000)
   console.log(selectedTitle, selectedGenre)
+
   const datalist: Slide[] = [
     {
       id: '1',

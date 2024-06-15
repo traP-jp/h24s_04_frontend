@@ -20,7 +20,12 @@ const currentSlideNum = ref(1)
   <div :class="$style.container">
     <div :class="$style.viewer">
       <div :class="$style.buttonContainer" data-direction="left">
-        <button :class="$style.button" @click="currentSlideNum--" v-if="currentSlideNum !== 1">
+        <button
+          :class="$style.button"
+          @click="currentSlideNum--"
+          v-if="currentSlideNum !== 1"
+          data-direction="left"
+        >
           <a-icon name="mdi:arrow-left-circle" :size="48" />
         </button>
       </div>
@@ -34,7 +39,12 @@ const currentSlideNum = ref(1)
         />
       </VuePDF>
       <div :class="$style.buttonContainer" data-direction="right">
-        <button :class="$style.button" @click="currentSlideNum++" v-if="currentSlideNum !== pages">
+        <button
+          :class="$style.button"
+          @click="currentSlideNum++"
+          v-if="currentSlideNum !== pages"
+          data-direction="right"
+        >
           <a-icon name="mdi:arrow-right-circle" :size="48" />
         </button>
       </div>
@@ -57,19 +67,34 @@ const currentSlideNum = ref(1)
   top: 0;
   bottom: 0;
   z-index: 10;
-  margin: auto 0;
-  height: fit-content;
+  height: 100%;
+  width: 50%;
 
   &[data-direction='left'] {
-    left: 20px;
+    left: 0;
   }
   &[data-direction='right'] {
-    right: 20px;
+    right: 0;
   }
 
   display: none;
   .viewer:hover & {
     display: block;
+  }
+}
+.button {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+
+  &[data-direction='left'] {
+    padding-left: 20px;
+    justify-content: flex-start;
+  }
+  &[data-direction='right'] {
+    padding-right: 20px;
+    justify-content: flex-end;
   }
 }
 </style>
