@@ -31,7 +31,7 @@ const model = defineModel<File>({ required: true })
 
 <template>
   <div :class="$style.space">
-    <label :class=$style.word>
+    <label :class="$style.word">
       スライドの登録
     <div v-bind="getRootProps()" :class="[$style.cursor,$style.box]">
       <input v-bind="getInputProps()" />
