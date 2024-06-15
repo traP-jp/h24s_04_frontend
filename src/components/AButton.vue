@@ -8,7 +8,7 @@ withDefaults(
     danger?: boolean
   }>(),
   {
-    iconSize: 24,
+    iconSize: 20,
     danger: false
   }
 )
@@ -16,7 +16,9 @@ withDefaults(
 
 <template>
   <button :class="$style.button" :data-is-danger="danger">
-    <slot />
+    <span>
+      <slot />
+    </span>
     <a-icon :name="iconName" :size="iconSize" />
   </button>
 </template>
@@ -25,7 +27,7 @@ withDefaults(
 .button {
   display: flex;
   align-items: center;
-  gap: 2px;
+  gap: 4px;
   padding: 8px;
   border-radius: 8px;
   border: 1px solid #000;
