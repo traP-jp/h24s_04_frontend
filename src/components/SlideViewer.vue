@@ -3,13 +3,13 @@ import { VuePDF, usePDF } from '@tato30/vue-pdf'
 import { ref } from 'vue'
 import AIcon from '@/components/AIcon.vue'
 
-defineProps<{
-  slideId: string
-  thumbnail: string
+const props = defineProps<{
+  slideUrl: string
+  thumbnail?: string
 }>()
 
 const { pdf, pages } = usePDF({
-  url: '/slide.pdf', // slideIdからURL生成？
+  url: props.slideUrl,
   cMapUrl: '/cmaps/'
 })
 
@@ -26,7 +26,7 @@ const currentSlideNum = ref(1)
       </div>
       <VuePDF :width="841" :height="595" :pdf="pdf" :page="currentSlideNum">
         <img
-          v-if="currentSlideNum === 1"
+          v-if="currentSlideNum === 1 && thumbnail !== undefined"
           :width="841"
           :height="595"
           alt="1ページ目"
