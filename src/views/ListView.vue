@@ -1,23 +1,15 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import vSelect from 'vue-select'
+import SlideList from '../components/SlideList.vue'
 import 'vue-select/dist/vue-select.css'
-import { fetchSlide } from '@/features/list/api'
-import type { Slide } from '@/features/list/type'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
-const datalist = await fetchSlide()
 const genres = await fetchGenres()
-const selectedGenre = ref(null)
 
-const idToGenre = (slide: Slide) => {
-  const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
-    id: '0',
-    name: '不明'
-  }
-  return genre.name
-}
+const selectedGenre = ref(null)
+const selectedTitle = ref('')
 
 const test = () => {}
 </script>
@@ -35,26 +27,12 @@ const test = () => {}
           :reduce="(option: Genre) => option.id"
           :class="$style.search_genre"
         >
-
         </v-select>
       </div>
-      <div><input type="text" placeholder="タイトルで検索" :class="$style.search_title" /></div>
+      <div><input type="text" v-model="selectedTitle" placeholder="タイトルで検索" :class="$style.search_title" /></div>
       <div><button @click="test" :class="$style.sort">登録日で昇順ソート</button></div>
     </div>
-    <ul :class="$style.container">
-      <li v-for="data in datalist" :key="data.title" :class="$style.slide">
-        <div>
-          <img src="/slide.png" alt="スライド" :class="$style.image" />
-        </div>
-        <div :class="$style.letter">
-          <div :class="$style.name">
-            <div :class="$style.title">{{ data.title }}</div>
-            <div :class="$style.desc">{{ data.description }}</div>
-          </div>
-          <div :class="$style.genre">{{ idToGenre(data) }}</div>
-        </div>
-      </li>
-    </ul>
+    <SlideList />
   </div>
 </template>
 
