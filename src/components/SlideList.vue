@@ -27,16 +27,18 @@ const idToGenre = (id: string) => {
 <template>
   <ul :class="$style.container">
     <li v-for="data in datalist" :key="data.title" :class="$style.slide">
-      <div>
-        <img src="/slide.png" alt="スライド" :class="$style.image" />
-      </div>
-      <div :class="$style.letter">
-        <div :class="$style.name">
-          <div :class="$style.title">{{ data.title }}</div>
-          <div :class="$style.desc">{{ data.description }}</div>
+      <router-link :to="`/slides/${data.id}`" :class="$style.slideLink">
+        <div>
+          <img src="/slide.png" alt="スライド" :class="$style.image" />
         </div>
-        <div :class="$style.genre">{{ idToGenre(data.genre_id) }}</div>
-      </div>
+        <div :class="$style.letter">
+          <div :class="$style.name">
+            <div :class="$style.title">{{ data.title }}</div>
+            <div :class="$style.desc">{{ data.description }}</div>
+          </div>
+          <div :class="$style.genre">{{ idToGenre(data.genre_id) }}</div>
+        </div>
+      </router-link>
     </li>
   </ul>
 </template>
@@ -94,5 +96,10 @@ const idToGenre = (id: string) => {
 .genre {
   font-size: 16px;
   color: #000000;
+}
+.slideLink {
+  text-decoration: none;
+  padding: 16px;
+  height: 100%;
 }
 </style>
