@@ -4,16 +4,19 @@ import 'vue-select/dist/vue-select.css'
 import { ref } from 'vue'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
+import FileUploader from '@/components/FileUploader.vue'
 
 const genres = await fetchGenres()
 
 const selectedGenre = ref(null)
 const newTitle = ref('')
 const newExplanation = ref('')
+const newFile = ref<File | null>(null)
 </script>
 
 <template>
   <div>
+    <File-uploader v-model="newFile" />
     <div :class="$style.gap">
       <label :class="$style.container">
         タイトル
