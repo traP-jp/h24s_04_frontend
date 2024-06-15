@@ -18,7 +18,6 @@ const router = createRouter({
       name: 'slideDetail',
       component: () => import('../views/SlideDetailView.vue')
     }
-
   ]
 })
 

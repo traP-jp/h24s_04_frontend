@@ -1,35 +1,20 @@
 <script setup lang="ts">
-import { ref, computed } from 'vue'
+//import { ref, computed } from 'vue'
+import { fetchSlide } from '@/features/list/api'
+import type { Slide } from '@/features/list/type'
+import { fetchGenres } from '@/features/genres/api'
+import type { Genre } from '@/features/genres/type'
 
-interface Data {
-  title: string
-  description: string
-  genre: string
-}
+const datalist = await fetchSlide()
+const genres = await fetchGenres()
 
-const datalist = ref<Data[]>([
-  {
-    title: 'slide1sssssssssssssssssssssssssssssssssss',
-    description: 'test1',
-    genre: 'hackathon'
-  },
-  {
-    title: 'slide2',
-    description:
-      'test2test2test2test2test2test2test2test2test2test2test2test2test2test2test2tesetttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt',
-    genre: 'hackathon'
-  },
-  {
-    title: 'slide3',
-    description: 'test3',
-    genre: 'graphic'
-  },
-  {
-    title: 'slide4',
-    description: 'test4',
-    genre: 'graphic'
+const idToGenre = (slide: Slide) => {
+  const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
+    id: '0',
+    name: '不明'
   }
-])
+  return genre.name
+}
 </script>
 
 <template>
@@ -41,14 +26,14 @@ const datalist = ref<Data[]>([
     <ul :class="$style.container">
       <li v-for="data in datalist" :key="data.title" :class="$style.slide">
         <div>
-          <img src="../../public/slide.png" alt="スライド" :class="$style.image" />
+          <img src="/slide.png" alt="スライド" :class="$style.image" />
         </div>
         <div :class="$style.letter">
           <div :class="$style.name">
             <div :class="$style.title">{{ data.title }}</div>
             <div :class="$style.desc">{{ data.description }}</div>
           </div>
-          <div :class="$style.genre">{{ data.genre }}</div>
+          <div :class="$style.genre">{{ idToGenre(data) }}</div>
         </div>
       </li>
     </ul>
