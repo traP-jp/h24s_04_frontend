@@ -25,7 +25,7 @@ const handleRegisterSlide = async () => {
 </script>
 
 <template>
-  <div>
+  <div :class="$style.page">
     <File-uploader v-model:file="newFile" v-model:url="url" />
     <SlideViewer v-if="url !== ''" :slideUrl="url" />
     <div :class="[$style.gap, $style.left]">
@@ -56,6 +56,12 @@ const handleRegisterSlide = async () => {
 </template>
 
 <style lang="scss" module>
+.page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 20px;
+}
 .container {
   display: flex;
   flex-direction: column;

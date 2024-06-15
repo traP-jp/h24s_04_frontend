@@ -1,42 +1,76 @@
 <script setup lang="ts">
-//import { ref, computed } from 'vue'
-import { fetchSlide } from '@/features/list/api'
-import type { Slide } from '@/features/list/type'
+import { ref } from 'vue'
+import vSelect from 'vue-select'
+import SlideList from '@/components/SlideList.vue'
+import AIcon from '@/components/AIcon.vue'
+import 'vue-select/dist/vue-select.css'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
-const datalist = await fetchSlide()
+export type SortType = 'asc' | 'desc'
+
+const ascStr = '登録日で昇順ソート'
+const descStr = '登録日で降順ソート'
 const genres = await fetchGenres()
 
-const idToGenre = (slide: Slide) => {
-  const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
-    id: '0',
-    name: '不明'
+const selectedGenre = ref<string | null>(null)
+const selectedTitle = ref('')
+const sort = ref<SortType>('desc')
+const sortStr = ref(ascStr)
+
+const changeSort = () => {
+  if (sort.value === 'asc') {
+    sort.value = 'desc'
+    sortStr.value = ascStr
+  } else {
+    sort.value = 'asc'
+    sortStr.value = descStr
   }
-  return genre.name
 }
 </script>
 
 <template>
   <div :class="$style.page">
     <h1 :class="$style.toptitle">スライド一覧</h1>
-    <div>
-      <!-- <p>登録日で昇順ソート</p> -->
+    <div :class="$style.search">
+      <div>
+        <v-select
+          :options="genres"
+          v-model="selectedGenre"
+          label="name"
+          placeholder="ジャンルを選択"
+          :reduce="(option: Genre) => option.id"
+          :class="$style.search_genre"
+        >
+        </v-select>
+      </div>
+      <div>
+        <input
+          type="text"
+          v-model="selectedTitle"
+          placeholder="タイトルで検索"
+          :class="$style.search_title"
+        />
+      </div>
+      <div>
+        <button @click="changeSort" :class="$style.sort">
+          {{ sortStr }}
+          <div v-if="sortStr === ascStr"><a-icon name="mdi:sort-ascending" /></div>
+          <div v-if="sortStr === descStr"><a-icon name="mdi:sort-descending" /></div>
+        </button>
+      </div>
     </div>
-    <ul :class="$style.container">
-      <li v-for="data in datalist" :key="data.title" :class="$style.slide">
-        <div>
-          <img src="/slide.png" alt="スライド" :class="$style.image" />
-        </div>
-        <div :class="$style.letter">
-          <div :class="$style.name">
-            <div :class="$style.title">{{ data.title }}</div>
-            <div :class="$style.desc">{{ data.description }}</div>
-          </div>
-          <div :class="$style.genre">{{ idToGenre(data) }}</div>
-        </div>
-      </li>
-    </ul>
+    <suspense>
+      <template #default>
+        <SlideList
+          :key="[selectedTitle, selectedGenre, sort].join()"
+          :selectedTitle="selectedTitle"
+          :selectedGenre="selectedGenre"
+          :sort="sort"
+        />
+      </template>
+      <template #fallback> loading... </template>
+    </suspense>
   </div>
 </template>
 
@@ -45,7 +79,7 @@ const idToGenre = (slide: Slide) => {
   display: flex;
   flex-direction: column;
   gap: 16px;
-  padding: 20px 20px;
+  padding: 20px 100px;
 }
 .toptitle {
   font-size: 24px;
@@ -102,5 +136,45 @@ const idToGenre = (slide: Slide) => {
 .genre {
   font-size: 16px;
   color: #000000;
+}
+.search {
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 24px;
+  align-items: baseline;
+}
+.sort {
+  font-size: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 172px;
+  height: 30px;
+  border-radius: 4px;
+  border: 1px dotted;
+  background: #ffffff;
+}
+.sort:hover {
+  background-color: #ececec;
+}
+.sort:active {
+  background-color: #ffffff;
+}
+.search_title {
+  width: 184px;
+  height: 35px;
+  font-size: 16px;
+  border-width: 1px;
+  border-radius: 8px;
+  padding-left: 12px;
+  border: 1px solid;
+}
+.search_genre {
+  width: 188px;
+  height: 43px;
+  font-size: 16px;
+  border-radius: 8px;
+  color: #8d8d8d;
+  padding-left: 12px;
 }
 </style>
