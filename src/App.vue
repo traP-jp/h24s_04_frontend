@@ -5,7 +5,18 @@ import { RouterView } from 'vue-router'
 <template>
   <header>header</header>
   <main>
-    <RouterView />
+    <router-view v-slot="{ Component }">
+      <template v-if="Component">
+        <suspense>
+          <template #default>
+            <component :is="Component" />
+          </template>
+          <template #fallback>
+            <div>loading...</div>
+          </template>
+        </suspense>
+      </template>
+    </router-view>
   </main>
 </template>
 

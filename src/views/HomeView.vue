@@ -1,3 +1,7 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { fetchGenres } from '@/features/genres/api';
 
-<template>aaa</template>
+const genres = await fetchGenres()
+</script>
+
+<template>{{ genres }}</template>
