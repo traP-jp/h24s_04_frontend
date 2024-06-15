@@ -96,7 +96,7 @@ const handleDelete = async () => {
       </div>
     </div>
     <div :class="$style.slideViewer">
-      <SlideViewer />
+      <SlideViewer :slide-id="slide.id" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>

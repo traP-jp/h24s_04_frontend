@@ -6,8 +6,8 @@ export const fetchSlideDetail = async (id: string) => {
   await sleep(1000)
   const slide: SlideDetail = {
     id: '1',
-    dl_url: 'https://q.trap.jp/api/v3/public/icon/mehm8128',
-    thumb_url: 'https://example.com',
+    dl_url: '/slide.pdf',
+    thumb_url: '/slide.png',
     title: 'なろう講習会第一回',
     genre_id: '1',
     posted_at: '2021-10-01T00:00:00.000Z',
