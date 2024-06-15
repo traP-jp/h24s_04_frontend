@@ -3,7 +3,7 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { ref } from 'vue'
 import { fetchGenres } from '@/features/genres/api'
-import { Genre } from '@/features/genres/type'
+import type { Genre } from '@/features/genres/type'
 
 const genres = await fetchGenres()
 
@@ -21,9 +21,7 @@ const newExplanation = ref('')
       </label>
       <label :class="$style.container">
         説明
-        <textarea 
-           :class="[$style.height,$style.border]" 
-           v-model="newExplanation" type="text" />
+        <textarea :class="[$style.height, $style.border]" v-model="newExplanation" type="text" />
       </label>
       <label :class="$style.container">
         ジャンル
