@@ -7,3 +7,9 @@ export interface SlideDetail {
   posted_at: string
   description: string
 }
+
+export interface SlideEditRequest {
+  title: string
+  genre_id: string
+  description: string
+}

@@ -1,7 +1,9 @@
-import type { SlideDetail } from './type'
+import { sleep } from '@/lib/mockUtils'
+import type { SlideDetail, SlideEditRequest } from './type'
 import ky from 'ky'
 
 export const fetchSlideDetail = async (id: string) => {
+  await sleep(1000)
   const slide: SlideDetail = {
     id: '1',
     dl_url: 'https://example.com',
@@ -13,6 +15,13 @@ export const fetchSlideDetail = async (id: string) => {
   }
   return slide
 
-  const res: SlideDetail = await ky.get(`/slide/${id}`).json()
+  const res: SlideDetail = await ky.get(`/slides/${id}`).json()
   return res
+}
+
+export const editSlideDetail = async (id: string, request: SlideEditRequest) => {
+  await sleep(1000)
+  return
+
+  await ky.patch(`/slides/${id}`, { json: request })
 }
