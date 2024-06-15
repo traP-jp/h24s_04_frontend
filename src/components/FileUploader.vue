@@ -14,17 +14,11 @@ function onDrop(acceptedFiles: File[], rejectReasons: FileRejectReason[]) {
 const options = reactive({
   multiple: false,
   onDrop,
-  accept: '.pdf',
+  accept: '.pdf'
 })
 
-const {
-  getRootProps,
-  getInputProps,
-  isDragActive,
-  isFocused,
-  isDragReject,
-  open
-} = useDropzone(options)
+const { getRootProps, getInputProps, isDragActive, isFocused, isDragReject, open } =
+  useDropzone(options)
 
 const model = defineModel<File>({ required: true })
 </script>
@@ -33,13 +27,13 @@ const model = defineModel<File>({ required: true })
   <div :class="$style.space">
     <label :class="$style.word">
       スライドの登録
-    <div v-bind="getRootProps()" :class="[$style.cursor,$style.box]">
-      <input v-bind="getInputProps()" />
-      <div>
-      <a-icon name="mdi:tray-arrow-up" :class="$style.icon"/>
-      <p>アップロード</p>
+      <div v-bind="getRootProps()" :class="[$style.cursor, $style.box]">
+        <input v-bind="getInputProps()" />
+        <div>
+          <a-icon name="mdi:tray-arrow-up" :class="$style.icon" />
+          <p>アップロード</p>
+        </div>
       </div>
-    </div>
     </label>
   </div>
 </template>
@@ -63,7 +57,7 @@ const model = defineModel<File>({ required: true })
   width: 500px;
   border-radius: 16px;
   border: 1px solid #000000;
-  background-color: #D9D9D9;
+  background-color: #d9d9d9;
   display: flex;
   justify-content: center;
   align-items: center;
