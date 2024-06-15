@@ -80,7 +80,7 @@ const handleSave = async () => {
         <v-select
           v-else
           :options="genres"
-          v-model="editedValue.title"
+          v-model="editedValue.genre_id"
           label="name"
           :reduce="(option: Genre) => option.id"
         >

@@ -21,6 +21,7 @@ export const fetchSlideDetail = async (id: string) => {
 
 export const editSlideDetail = async (id: string, request: SlideEditRequest) => {
   await sleep(1000)
+  console.log(request)
   return
 
   await ky.patch(`/slides/${id}`, { json: request })
