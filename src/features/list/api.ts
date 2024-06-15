@@ -51,8 +51,6 @@ export const fetchSlide = async (selectedTitle: string, selectedGenre: string | 
     params.append('genre_id', selectedGenre)
   }
   
-  return datalist
-
   const res: Slide[] = await ky.get(`/slides`, { searchParams: params }).json()
   return res
 }

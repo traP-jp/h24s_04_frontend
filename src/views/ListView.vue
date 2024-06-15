@@ -7,25 +7,25 @@ import 'vue-select/dist/vue-select.css'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
-export type SortType="asc"|"desc"
+export type SortType = 'asc' | 'desc'
 
-const ascStr = "登録日で昇順ソート"
-const descStr = "登録日で降順ソート"
+const ascStr = '登録日で昇順ソート'
+const descStr = '登録日で降順ソート'
 const genres = await fetchGenres()
 
-const selectedGenre = ref<string|null>(null)
+const selectedGenre = ref<string | null>(null)
 const selectedTitle = ref('')
-const sort = ref<SortType>("desc")
+const sort = ref<SortType>('desc')
 const sortStr = ref(ascStr)
 
 const changeSort = () => {
-    if(sort.value === "asc"){
-        sort.value = "desc"
-        sortStr.value = ascStr
-    } else {
-        sort.value = "asc"
-        sortStr.value = descStr
-    }
+  if (sort.value === 'asc') {
+    sort.value = 'desc'
+    sortStr.value = ascStr
+  } else {
+    sort.value = 'asc'
+    sortStr.value = descStr
+  }
 }
 </script>
 
@@ -44,13 +44,33 @@ const changeSort = () => {
         >
         </v-select>
       </div>
-      <div><input type="text" v-model="selectedTitle" placeholder="タイトルで検索" :class="$style.search_title" /></div>
-      <div><button @click="changeSort" :class="$style.sort">{{ sortStr }}
-        <div v-if="sortStr === ascStr"><a-icon name="mdi:sort-ascending" /></div>
-        <div v-if="sortStr === descStr"><a-icon name="mdi:sort-descending" /></div>
-      </button></div>
+      <div>
+        <input
+          type="text"
+          v-model="selectedTitle"
+          placeholder="タイトルで検索"
+          :class="$style.search_title"
+        />
+      </div>
+      <div>
+        <button @click="changeSort" :class="$style.sort">
+          {{ sortStr }}
+          <div v-if="sortStr === ascStr"><a-icon name="mdi:sort-ascending" /></div>
+          <div v-if="sortStr === descStr"><a-icon name="mdi:sort-descending" /></div>
+        </button>
+      </div>
     </div>
-    <SlideList :key="[selectedTitle,selectedGenre,sort].join()" :selectedTitle="selectedTitle" :selectedGenre="selectedGenre" :sort="sort"/>
+    <suspense>
+      <template #default>
+        <SlideList
+          :key="[selectedTitle, selectedGenre, sort].join()"
+          :selectedTitle="selectedTitle"
+          :selectedGenre="selectedGenre"
+          :sort="sort"
+        />
+      </template>
+      <template #fallback> loading... </template>
+    </suspense>
   </div>
 </template>
 
