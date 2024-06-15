@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 import FileUploader from '@/components/FileUploader.vue'
+import { registerSlide } from '@/features/sendButton/api'
 
 const genres = await fetchGenres()
 
@@ -12,6 +13,13 @@ const selectedGenre = ref(null)
 const newTitle = ref('')
 const newExplanation = ref('')
 const newFile = ref<File | null>(null)
+
+const handleRegisterSlide = async () => {
+  if (selectedGenre.value === null || newFile.value === null) {
+    return
+  }
+  await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
+}
 </script>
 
 <template>
@@ -37,6 +45,7 @@ const newFile = ref<File | null>(null)
         >
         </v-select>
       </label>
+      <button @click="handleRegisterSlide">スライドを登録</button>
     </div>
   </div>
 </template>
