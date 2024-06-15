@@ -3,15 +3,14 @@
 // import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { fetchSlide } from '@/features/list/api'
-import type { Slide } from '@/features/list/type'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
 const datalist = await fetchSlide()
 const genres = await fetchGenres()
 
-const idToGenre = (slide: Slide) => {
-  const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
+const idToGenre = (id: string) => {
+  const genre: Genre = genres.find((genre) => genre.id === id) ?? {
     id: '0',
     name: '不明'
   }
@@ -30,7 +29,7 @@ const idToGenre = (slide: Slide) => {
           <div :class="$style.title">{{ data.title }}</div>
           <div :class="$style.desc">{{ data.description }}</div>
         </div>
-        <div :class="$style.genre">{{ idToGenre(data) }}</div>
+        <div :class="$style.genre">{{ idToGenre(data.genre_id) }}</div>
       </div>
     </li>
   </ul>
