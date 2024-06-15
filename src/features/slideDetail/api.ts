@@ -6,7 +6,7 @@ export const fetchSlideDetail = async (id: string) => {
   await sleep(1000)
   const slide: SlideDetail = {
     id: '1',
-    dl_url: 'https://example.com',
+    dl_url: 'https://q.trap.jp/api/v3/public/icon/mehm8128',
     thumb_url: 'https://example.com',
     title: 'なろう講習会第一回',
     genre_id: '1',
@@ -25,4 +25,11 @@ export const editSlideDetail = async (id: string, request: SlideEditRequest) => 
   return
 
   await ky.patch(`/slides/${id}`, { json: request })
+}
+
+export const deleteSlideDetail = async (id: string) => {
+  await sleep(1000)
+  return
+
+  await ky.delete(`/slides/${id}`)
 }

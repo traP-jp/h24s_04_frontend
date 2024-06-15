@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { editSlideDetail, fetchSlideDetail } from '@/features/slideDetail/api'
+import { deleteSlideDetail, editSlideDetail, fetchSlideDetail } from '@/features/slideDetail/api'
 import UserIcon from '@/components/UserIcon.vue'
 import AIcon from '@/components/AIcon.vue'
 import { fetchGenres } from '@/features/genres/api'
@@ -8,11 +8,12 @@ import AButton from '@/components/AButton.vue'
 import SlideViewer from '@/components/SlideViewer.vue'
 import type { SlideEditRequest } from '@/features/slideDetail/type'
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 
 const route = useRoute()
+const router = useRouter()
 const id = route.params.id as string
 
 const slide = await fetchSlideDetail(id)
@@ -42,6 +43,10 @@ const handleSave = async () => {
   await editSlideDetail(id, editedValue.value)
   isEditMode.value = false
 }
+const handleDelete = async () => {
+  await deleteSlideDetail(id)
+  router.push('/')
+}
 </script>
 
 <template>
@@ -51,9 +56,12 @@ const handleSave = async () => {
       <input v-else v-model="editedValue.title" :class="$style.titleInput" />
       <div :class="$style.buttons">
         <template v-if="!isEditMode">
-          <a-button iconName="mdi:tray-arrow-down">ダウンロード</a-button>
+          <a :download="`${slide.title}.pdf`" :href="slide.dl_url" :class="$style.downloadLink">
+            <span>ダウンロード</span>
+            <a-icon name="mdi:tray-arrow-down" />
+          </a>
           <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドを編集</a-button>
-          <a-button iconName="mdi:delete" danger>スライドを削除</a-button>
+          <a-button iconName="mdi:delete" danger @click="handleDelete">スライドを削除</a-button>
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
@@ -153,5 +161,35 @@ const handleSave = async () => {
   border-radius: 6px;
   border: 1px solid #000000;
   padding: 8px;
+}
+.downloadLink {
+  text-decoration: none;
+  color: black;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #000;
+
+  &:hover {
+    background-color: #d9d9d9;
+  }
+  &:active {
+    background-color: #bbbbbb;
+  }
+
+  &[data-is-danger='true'] {
+    color: #ec4949;
+    border-color: #ec4949;
+
+    &:hover {
+      background-color: #e5c2c2;
+    }
+    &:active {
+      background-color: #e3a1a1;
+    }
+  }
 }
 </style>
