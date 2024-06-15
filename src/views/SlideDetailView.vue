@@ -116,7 +116,7 @@ const handleUpload = async () => {
       </div>
     </div>
     <div :class="$style.slideViewer">
-      <div :class="$style.uploadButtonContainer">
+      <div :class="$style.uploadButtonContainer" v-if="isEditMode">
         <div v-bind="getRootProps()">
           <input v-bind="getInputProps()" />
           <a-button @click="handleUpload" iconName="mdi:tray-arrow-up">
