@@ -31,14 +31,16 @@ const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
   description: slide.description,
-  genre_id: slide.genre_id
+  genre_id: slide.genre_id,
+  url: slide.dl_url
 })
 
 const handleCancel = () => {
   editedValue.value = {
     title: slide.title,
     description: slide.description,
-    genre_id: slide.genre_id
+    genre_id: slide.genre_id,
+    url: slide.dl_url
   }
   isEditMode.value = false
 }
@@ -70,7 +72,6 @@ const { getRootProps, getInputProps, open } = useDropzone(options)
 
 const handleUpload = async () => {
   open?.()
-  // アップロードタイミング要検討
 }
 </script>
 
