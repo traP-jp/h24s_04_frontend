@@ -16,6 +16,7 @@ import { uploadFile } from '@/features/upload/api'
 import { dataURLToBlob } from '@/lib/blob'
 
 const toast = useToast()
+const isSending = ref(false)
 
 const route = useRoute()
 const router = useRouter()
@@ -47,6 +48,7 @@ const handleCancel = () => {
 }
 
 const handleSave = async () => {
+  isSending.value = true
   try {
     await editSlideDetail(id, editedValue.value)
     toast.success('変更を保存しました')
@@ -56,10 +58,12 @@ const handleSave = async () => {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
+  isSending.value = false
 }
 const handleDelete = async () => {
   if (!window.confirm('本当にこのスライドを削除しますか？')) return
 
+  isSending.value = true
   try {
     await deleteSlideDetail(id)
     toast.success('スライドを削除しました')
@@ -69,6 +73,7 @@ const handleDelete = async () => {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
+  isSending.value = false
 }
 
 const onDrop = async (acceptedFiles: File[]) => {
@@ -111,11 +116,11 @@ const handleUpload = async () => {
             <a-icon name="mdi:tray-arrow-down" />
           </a>
           <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドの情報を編集</a-button>
-          <a-button iconName="mdi:delete" danger @click="handleDelete">スライドを削除</a-button>
+          <a-button iconName="mdi:delete" danger :disabled="isSending" @click="handleDelete">スライドを削除</a-button>
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
-          <a-button iconName="mdi:check" @click="handleSave" primary>変更を保存</a-button>
+          <a-button iconName="mdi:check" :disabled="isSending" @click="handleSave" primary>変更を保存</a-button>
         </template>
       </div>
     </div>

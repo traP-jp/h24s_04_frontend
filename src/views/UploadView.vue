@@ -19,11 +19,14 @@ const newTitle = ref('')
 const newExplanation = ref('')
 const newFile = ref<File | null>(null)
 const url = ref('')
+const isSending = ref(false)
 
 const handleRegisterSlide = async () => {
   if (selectedGenre.value === null || newFile.value === null) {
     return
   }
+  isSending.value = true
+
   try {
     // 1枚目の画像を取得
     const canvas = document.querySelector('canvas')
@@ -47,6 +50,7 @@ const handleRegisterSlide = async () => {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
+  isSending.value = false
 }
 </script>
 
@@ -75,7 +79,7 @@ const handleRegisterSlide = async () => {
         </v-select>
       </label>
       <dev :class="$style.moreleft">
-        <a-button @click="handleRegisterSlide" :class="$style.button" primary>
+        <a-button :disabled="isSending" @click="handleRegisterSlide" :class="$style.button" primary>
           スライドを登録
         </a-button>
       </dev>
