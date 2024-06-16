@@ -12,6 +12,9 @@ import { useRoute, useRouter } from 'vue-router'
 import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
+import { useToast } from 'vue-toastification'
+
+const toast = useToast()
 
 const route = useRoute()
 const router = useRouter()
@@ -42,10 +45,12 @@ const handleCancel = () => {
 
 const handleSave = async () => {
   await editSlideDetail(id, editedValue.value)
+  toast.success('変更を保存しました')
   isEditMode.value = false
 }
 const handleDelete = async () => {
   await deleteSlideDetail(id)
+  toast.success('スライドを削除しました')
   router.push('/')
 }
 
