@@ -13,7 +13,7 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
 import { useToast } from 'vue-toastification'
-import { uploadFile } from '@/features/sendButton/api'
+import { uploadFile } from '@/features/upload/api'
 
 const toast = useToast()
 
