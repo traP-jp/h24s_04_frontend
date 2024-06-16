@@ -6,12 +6,13 @@ export const registerSlide = async (
   title: string,
   description: string,
   selectedGenre: string,
-  file: File
+  file: File,
+  thumbnail: Blob
 ) => {
   if (isDev()) {
     return
   }
-  const res = await uploadFile(file)
+  const res = await uploadFile(file, thumbnail)
 
   const data: Data = {
     title,
@@ -24,7 +25,7 @@ export const registerSlide = async (
   await ky.post('/api/slides', { json: data })
 }
 
-export const uploadFile = async (file: File) => {
+export const uploadFile = async (file: File, thumbnail: Blob) => {
   if (isDev()) {
     return {
       url: 'https://example.com',
@@ -33,6 +34,7 @@ export const uploadFile = async (file: File) => {
   }
   const formData = new FormData()
   formData.append('file', file)
+  formData.append('thumbnail', thumbnail)
 
   const response: Response = await ky.post('/api/upload', { body: formData }).json()
 

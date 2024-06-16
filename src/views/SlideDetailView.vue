@@ -13,6 +13,7 @@ import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
 import { useToast } from 'vue-toastification'
 import { uploadFile } from '@/features/upload/api'
+import { dataURLToBlob } from '@/lib/blob'
 
 const toast = useToast()
 
@@ -73,7 +74,15 @@ const handleDelete = async () => {
 const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
 
-  const { url } = await uploadFile(file)
+  // 1枚目の画像を取得
+  const canvas = document.querySelector('canvas')
+  if (!canvas) {
+    throw new Error('canvas is undefined')
+  }
+  const imgSrc = canvas.toDataURL('image/png')
+
+  const blob = dataURLToBlob(imgSrc)
+  const { url } = await uploadFile(file, blob)
   editedValue.value.url = url
 }
 
