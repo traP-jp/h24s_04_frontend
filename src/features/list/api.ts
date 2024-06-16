@@ -3,9 +3,7 @@ import type { Slide } from './type'
 import type { SortType } from '@/views/ListView.vue'
 import ky from 'ky'
 
-export const fetchSlide = async (
-  sort: SortType
-) => {
+export const fetchSlide = async (sort: SortType) => {
   const exampleSlides: Slide[] = [
     {
       id: '1',
@@ -66,9 +64,8 @@ export const fetchSlide = async (
   // if (selectedGenre !== null) {
   //   params.append('genre_id', selectedGenre)
   // }
-  params.append('orderby','posted_id')
-  params.append('sortorder',sort)
-
+  params.append('orderby', 'posted_id')
+  params.append('sortorder', sort)
 
   const res: Slide[] = await ky.get(`/api/slides`, { searchParams: params }).json()
   return res

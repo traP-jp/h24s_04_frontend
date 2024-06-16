@@ -68,9 +68,7 @@ const changeSort = () => {
           :selectedGenre="selectedGenre"
           :sort="sort"
         /> -->
-        <SlideList 
-          :key="[sort].join()"
-          :sort="sort"/>
+        <SlideList :key="[sort].join()" :sort="sort" />
       </template>
       <template #fallback> loading... </template>
     </suspense>
