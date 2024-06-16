@@ -52,7 +52,7 @@ const handleRegisterSlide = async () => {
         <v-select
           :options="genres"
           v-model="selectedGenre"
-          label="genre"
+          label="genrename"
           :reduce="(option: Genre) => option.id"
           :class="$style.border"
         >
