@@ -16,6 +16,7 @@ import { uploadFile } from '@/features/upload/api'
 import { dataURLToBlob } from '@/lib/blob'
 
 const toast = useToast()
+const isSending = ref(false)
 
 const route = useRoute()
 const router = useRouter()
@@ -47,6 +48,7 @@ const handleCancel = () => {
 }
 
 const handleSave = async () => {
+  isSending.value = true
   try {
     await editSlideDetail(id, editedValue.value)
     toast.success('変更を保存しました')
@@ -56,10 +58,12 @@ const handleSave = async () => {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
+  isSending.value = false
 }
 const handleDelete = async () => {
   if (!window.confirm('本当にこのスライドを削除しますか？')) return
 
+  isSending.value = true
   try {
     await deleteSlideDetail(id)
     toast.success('スライドを削除しました')
@@ -69,21 +73,30 @@ const handleDelete = async () => {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
+  isSending.value = false
 }
 
 const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
 
-  // 1枚目の画像を取得
-  const canvas = document.querySelector('canvas')
-  if (!canvas) {
-    throw new Error('canvas is undefined')
-  }
-  const imgSrc = canvas.toDataURL('image/png')
+  isSending.value = true
+  try {
+    // 1枚目の画像を取得
+    const canvas = document.querySelector('canvas')
+    if (!canvas) {
+      throw new Error('canvas is undefined')
+    }
+    const imgSrc = canvas.toDataURL('image/png')
 
-  const blob = dataURLToBlob(imgSrc)
-  const { dl_url } = await uploadFile(file, blob)
-  editedValue.value.url = dl_url
+    const blob = dataURLToBlob(imgSrc)
+    const { dl_url } = await uploadFile(file, blob)
+    editedValue.value.url = dl_url
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
+  isSending.value = false
 }
 
 const options = reactive({
@@ -111,11 +124,15 @@ const handleUpload = async () => {
             <a-icon name="mdi:tray-arrow-down" />
           </a>
           <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドの情報を編集</a-button>
-          <a-button iconName="mdi:delete" danger @click="handleDelete">スライドを削除</a-button>
+          <a-button iconName="mdi:delete" danger :disabled="isSending" @click="handleDelete"
+            >スライドを削除</a-button
+          >
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
-          <a-button iconName="mdi:check" @click="handleSave" primary>変更を保存</a-button>
+          <a-button iconName="mdi:check" :disabled="isSending" @click="handleSave" primary
+            >変更を保存</a-button
+          >
         </template>
       </div>
     </div>
@@ -144,7 +161,7 @@ const handleUpload = async () => {
       <div :class="$style.uploadButtonContainer" v-if="isEditMode">
         <div v-bind="getRootProps()">
           <input v-bind="getInputProps()" />
-          <a-button @click="handleUpload" iconName="mdi:tray-arrow-up">
+          <a-button :disabled="isSending" @click="handleUpload" iconName="mdi:tray-arrow-up">
             スライドの再アップロード
           </a-button>
         </div>

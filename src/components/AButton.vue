@@ -35,34 +35,39 @@ withDefaults(
   border-radius: 8px;
   border: 1px solid #000;
 
-  &:hover {
-    background-color: #d9d9d9;
-  }
-  &:active {
-    background-color: #bbbbbb;
+  &:not(:disabled) {
+    &:hover {
+      background-color: #d9d9d9;
+    }
+    &:active {
+      background-color: #bbbbbb;
+    }
   }
 
   &[data-is-primary='true'] {
     background-color: #90bfeb;
     border: none;
 
-    &:hover {
-      background-color: #7bb3e7;
-    }
-    &:active {
-      background-color: #459aea;
+    &:not(:disabled) {
+      &:hover {
+        background-color: #7bb3e7;
+      }
+      &:active {
+        background-color: #459aea;
+      }
     }
   }
 
   &[data-is-danger='true'] {
     color: #ec4949;
     border-color: #ec4949;
-
-    &:hover {
-      background-color: #e5c2c2;
-    }
-    &:active {
-      background-color: #e3a1a1;
+    &:not(:disabled) {
+      &:hover {
+        background-color: #e5c2c2;
+      }
+      &:active {
+        background-color: #e3a1a1;
+      }
     }
   }
 }
