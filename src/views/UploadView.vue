@@ -22,8 +22,14 @@ const handleRegisterSlide = async () => {
   if (selectedGenre.value === null || newFile.value === null) {
     return
   }
-  await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
-  toast.success('スライドを登録しました')
+  try {
+    await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
+    toast.success('スライドを登録しました')
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 </script>
 
