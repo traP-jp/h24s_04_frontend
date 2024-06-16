@@ -35,7 +35,7 @@ withDefaults(
   border-radius: 8px;
   border: 1px solid #000;
 
-  &:not(:disabled){
+  &:not(:disabled) {
     &:hover {
       background-color: #d9d9d9;
     }
@@ -44,12 +44,11 @@ withDefaults(
     }
   }
 
-
   &[data-is-primary='true'] {
     background-color: #90bfeb;
     border: none;
-    
-    &:not(:disabled){
+
+    &:not(:disabled) {
       &:hover {
         background-color: #7bb3e7;
       }
@@ -62,7 +61,7 @@ withDefaults(
   &[data-is-danger='true'] {
     color: #ec4949;
     border-color: #ec4949;
-    &:not(:disabled){
+    &:not(:disabled) {
       &:hover {
         background-color: #e5c2c2;
       }

@@ -80,18 +80,18 @@ const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
 
   isSending.value = true
-  try {// 1枚目の画像を取得
+  try {
+    // 1枚目の画像を取得
     const canvas = document.querySelector('canvas')
     if (!canvas) {
       throw new Error('canvas is undefined')
     }
     const imgSrc = canvas.toDataURL('image/png')
 
-
     const blob = dataURLToBlob(imgSrc)
     const { dl_url } = await uploadFile(file, blob)
     editedValue.value.url = dl_url
-  }catch (e) {
+  } catch (e) {
     if (e instanceof Error) {
       toast.error(`エラーが発生しました: ${e.message}`)
     }
@@ -124,11 +124,15 @@ const handleUpload = async () => {
             <a-icon name="mdi:tray-arrow-down" />
           </a>
           <a-button iconName="mdi:pencil" @click="isEditMode = true">スライドの情報を編集</a-button>
-          <a-button iconName="mdi:delete" danger :disabled="isSending" @click="handleDelete">スライドを削除</a-button>
+          <a-button iconName="mdi:delete" danger :disabled="isSending" @click="handleDelete"
+            >スライドを削除</a-button
+          >
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
-          <a-button iconName="mdi:check" :disabled="isSending" @click="handleSave" primary>変更を保存</a-button>
+          <a-button iconName="mdi:check" :disabled="isSending" @click="handleSave" primary
+            >変更を保存</a-button
+          >
         </template>
       </div>
     </div>
