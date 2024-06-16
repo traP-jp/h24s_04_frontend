@@ -120,7 +120,7 @@ const handleUpload = async () => {
       </div>
     </div>
     <div :class="$style.infoContainer">
-      <p v-if="!isEditMode">{{ slide.description }}</p>
+      <p v-if="!isEditMode" :class="$style.description">{{ slide.description }}</p>
       <textarea v-else v-model="editedValue.description" :class="$style.textarea" />
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
@@ -248,5 +248,8 @@ const handleUpload = async () => {
 .uploadButtonContainer {
   display: flex;
   justify-content: flex-end;
+}
+.description {
+  white-space: pre-wrap;
 }
 </style>
