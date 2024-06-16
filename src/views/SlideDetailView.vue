@@ -82,8 +82,8 @@ const onDrop = async (acceptedFiles: File[]) => {
   const imgSrc = canvas.toDataURL('image/png')
 
   const blob = dataURLToBlob(imgSrc)
-  const { url } = await uploadFile(file, blob)
-  editedValue.value.url = url
+  const { dl_url } = await uploadFile(file, blob)
+  editedValue.value.url = dl_url
 }
 
 const options = reactive({

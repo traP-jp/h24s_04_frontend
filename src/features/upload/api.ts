@@ -19,7 +19,8 @@ export const registerSlide = async (
     title,
     description,
     genre_id: selectedGenre,
-    dl_url: res.url,
+    dl_url: res.dl_url,
+    thumb_url: res.thumb_url,
     filepath: res.path
   }
 
@@ -30,13 +31,14 @@ export const registerSlide = async (
 export const uploadFile = async (file: File, thumbnail: Blob) => {
   if (isDev()) {
     return {
-      url: 'https://example.com',
+      dl_url: 'https://example.com',
+      thumb_url: 'https://example.com',
       path: 'https://example.com'
     } satisfies Response
   }
   const formData = new FormData()
   formData.append('file', file)
-  formData.append('thumbnail', thumbnail)
+  formData.append('thumb', thumbnail)
 
   const response: Response = await ky.post('/api/upload', { body: formData }).json()
 
