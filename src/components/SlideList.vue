@@ -33,7 +33,7 @@ const idToGenre = (id: string) => {
         <div :class="$style.letter">
           <div :class="$style.name">
             <div :class="$style.title">{{ data.title }}</div>
-            <div :class="$style.desc">{{ data.description.String }}</div>
+            <div :class="$style.desc">{{ data.description }}</div>
           </div>
           <div :class="$style.genre">
             <a-icon name="mdi:label" />

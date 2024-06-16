@@ -31,7 +31,7 @@ const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
 const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
-  description: slide.description.String,
+  description: slide.description,
   genre_id: slide.genre_id,
   url: slide.dl_url
 })
@@ -39,7 +39,7 @@ const editedValue = ref<SlideEditRequest>({
 const handleCancel = () => {
   editedValue.value = {
     title: slide.title,
-    description: slide.description.String,
+    description: slide.description,
     genre_id: slide.genre_id,
     url: slide.dl_url
   }
@@ -120,7 +120,7 @@ const handleUpload = async () => {
       </div>
     </div>
     <div :class="$style.infoContainer">
-      <p v-if="!isEditMode">{{ slide.description.String }}</p>
+      <p v-if="!isEditMode">{{ slide.description }}</p>
       <textarea v-else v-model="editedValue.description" :class="$style.textarea" />
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
@@ -150,7 +150,7 @@ const handleUpload = async () => {
         </div>
       </div>
       <!--TODO: slide.idからURL生成-->
-      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url.String" />
+      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>
