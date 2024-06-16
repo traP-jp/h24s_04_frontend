@@ -142,14 +142,18 @@ const changeSort = () => {
   flex-direction: row-reverse;
   gap: 24px;
   align-items: baseline;
+
+  @media (width < 768px){
+    flex-direction: column-reverse;
+  }
 }
 .sort {
   font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 172px;
-  height: 30px;
+  width: 184px;
+  height: 33px;
   border-radius: 4px;
   border: 1px dotted;
   background: #ffffff;
@@ -170,11 +174,10 @@ const changeSort = () => {
   border: 1px solid;
 }
 .search_genre {
-  width: 188px;
+  width: 184px;
   height: 43px;
   font-size: 16px;
   border-radius: 8px;
-  padding-left: 12px;
 
   /**TODO: placeholderだけに設定 */
   color: #8d8d8d;
