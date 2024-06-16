@@ -37,7 +37,7 @@ const changeSort = () => {
         <v-select
           :options="genres"
           v-model="selectedGenre"
-          label="name"
+          label="genrename"
           placeholder="ジャンルを選択"
           :reduce="(option: Genre) => option.id"
           :class="$style.search_genre"

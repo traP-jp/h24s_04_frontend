@@ -123,7 +123,7 @@ const handleUpload = async () => {
           v-else
           :options="genres"
           v-model="editedValue.genre_id"
-          label="name"
+          label="genrename"
           :reduce="(option: Genre) => option.id"
         >
         </v-select>
