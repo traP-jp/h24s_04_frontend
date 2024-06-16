@@ -1,6 +1,6 @@
 export const isDev = () => {
   if (process.env.NODE_ENV === 'development') {
-    return 'development'
+    return true
   }
-  return 'production'
+  return false
 }
