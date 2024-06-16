@@ -13,6 +13,7 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
 import { useToast } from 'vue-toastification'
+import { uploadFile } from '@/features/sendButton/api'
 
 const toast = useToast()
 
@@ -68,10 +69,11 @@ const handleDelete = async () => {
   }
 }
 
-const newFile = ref<File | null>(null)
-const onDrop = (acceptedFiles: File[]) => {
+const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
-  newFile.value = file
+
+  const url = await uploadFile(file)
+  editedValue.value.url = url
 }
 
 const options = reactive({

@@ -7,17 +7,23 @@ export const registerSlide = async (
   selectedGenre: string,
   file: File
 ) => {
-  // 'multipart/form-data'
-  const formData = new FormData()
-  formData.append('file', file)
-  const response: Response = await ky.post('/upload', { body: formData }).json()
+  const url = await uploadFile(file)
 
   const data: Data = {
     title: title,
     description: description,
     genre_id: selectedGenre,
-    url: response.url
+    url: url
   }
 
   await ky.post('/slides', { json: data })
+}
+
+export const uploadFile = async (file: File) => {
+  const formData = new FormData()
+  formData.append('file', file)
+
+  const response: Response = await ky.post('/upload', { body: formData }).json()
+
+  return response.url
 }
