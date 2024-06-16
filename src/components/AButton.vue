@@ -3,23 +3,25 @@ import AIcon from './AIcon.vue'
 
 withDefaults(
   defineProps<{
-    iconName: string
+    iconName?: string
     iconSize?: number
+    primary?: boolean
     danger?: boolean
   }>(),
   {
     iconSize: 20,
+    primary: false,
     danger: false
   }
 )
 </script>
 
 <template>
-  <button :class="$style.button" :data-is-danger="danger">
+  <button :class="$style.button" :data-is-danger="danger" :data-is-primary="primary">
     <span>
       <slot />
     </span>
-    <a-icon :name="iconName" :size="iconSize" />
+    <a-icon v-if="iconName !== undefined" :name="iconName" :size="iconSize" />
   </button>
 </template>
 
@@ -27,6 +29,7 @@ withDefaults(
 .button {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   padding: 8px;
   border-radius: 8px;
@@ -37,6 +40,18 @@ withDefaults(
   }
   &:active {
     background-color: #bbbbbb;
+  }
+
+  &[data-is-primary='true'] {
+    background-color: #90bfeb;
+    border: none;
+
+    &:hover {
+      background-color: #7bb3e7;
+    }
+    &:active {
+      background-color: #459aea;
+    }
   }
 
   &[data-is-danger='true'] {

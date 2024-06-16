@@ -46,14 +46,26 @@ const handleCancel = () => {
 }
 
 const handleSave = async () => {
-  await editSlideDetail(id, editedValue.value)
-  toast.success('変更を保存しました')
-  isEditMode.value = false
+  try {
+    await editSlideDetail(id, editedValue.value)
+    toast.success('変更を保存しました')
+    isEditMode.value = false
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 const handleDelete = async () => {
-  await deleteSlideDetail(id)
-  toast.success('スライドを削除しました')
-  router.push('/')
+  try {
+    await deleteSlideDetail(id)
+    toast.success('スライドを削除しました')
+    router.push('/')
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 
 const newFile = ref<File | null>(null)
@@ -91,7 +103,7 @@ const handleUpload = async () => {
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
-          <a-button iconName="mdi:check" @click="handleSave">変更を保存</a-button>
+          <a-button iconName="mdi:check" @click="handleSave" primary>変更を保存</a-button>
         </template>
       </div>
     </div>

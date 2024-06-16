@@ -11,7 +11,7 @@
   align-items: center;
   gap: 20px;
   padding: 12px 20px;
-  background-color: #e7e7e7;
+  background-color: #90bfeb;
 
   a {
     color: black;

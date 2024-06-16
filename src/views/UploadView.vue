@@ -7,6 +7,7 @@ import type { Genre } from '@/features/genres/type'
 import FileUploader from '@/components/FileUploader.vue'
 import { registerSlide } from '@/features/sendButton/api'
 import SlideViewer from '@/components/SlideViewer.vue'
+import AButton from '@/components/AButton.vue'
 import { useToast } from 'vue-toastification'
 
 const genres = await fetchGenres()
@@ -22,8 +23,14 @@ const handleRegisterSlide = async () => {
   if (selectedGenre.value === null || newFile.value === null) {
     return
   }
-  await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
-  toast.success('スライドを登録しました')
+  try {
+    await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
+    toast.success('スライドを登録しました')
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 </script>
 
@@ -52,7 +59,9 @@ const handleRegisterSlide = async () => {
         </v-select>
       </label>
       <dev :class="$style.moreleft">
-        <button @click="handleRegisterSlide" :class="$style.button">スライドを登録</button>
+        <a-button @click="handleRegisterSlide" :class="$style.button" primary>
+          スライドを登録
+        </a-button>
       </dev>
     </div>
   </div>
