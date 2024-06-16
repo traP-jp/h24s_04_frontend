@@ -1,4 +1,4 @@
-import type { WithValid } from "@/features/list/type"
+import type { WithValid } from '@/features/list/type'
 
 export interface SlideDetail {
   id: string
