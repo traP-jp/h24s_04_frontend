@@ -1,6 +1,7 @@
 import { isDev } from '@/lib/env'
 import type { Data, Response } from './type'
 import ky from 'ky'
+import type { SlideDetail } from '@/features/slideDetail/type'
 
 export const registerSlide = async (
   title: string,
@@ -22,7 +23,8 @@ export const registerSlide = async (
     filepath: res.path
   }
 
-  await ky.post('/api/slides', { json: data })
+  const res2: SlideDetail = await ky.post('/api/slides', { json: data })
+  return res2.id
 }
 
 export const uploadFile = async (file: File, thumbnail: Blob) => {

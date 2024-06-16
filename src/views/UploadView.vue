@@ -10,7 +10,9 @@ import SlideViewer from '@/components/SlideViewer.vue'
 import AButton from '@/components/AButton.vue'
 import { useToast } from 'vue-toastification'
 import { dataURLToBlob } from '@/lib/blob'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const genres = await fetchGenres()
 const toast = useToast()
 
@@ -33,7 +35,7 @@ const handleRegisterSlide = async () => {
     const imgSrc = canvas.toDataURL('image/png')
 
     const blob = dataURLToBlob(imgSrc)
-    await registerSlide(
+    const id = await registerSlide(
       newTitle.value,
       newExplanation.value,
       selectedGenre.value,
@@ -42,6 +44,7 @@ const handleRegisterSlide = async () => {
     )
 
     toast.success('スライドを登録しました')
+    router.push(`/slides/${id}`)
   } catch (e) {
     if (e instanceof Error) {
       toast.error(`エラーが発生しました: ${e.message}`)
