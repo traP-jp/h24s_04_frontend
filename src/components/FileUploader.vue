@@ -61,7 +61,7 @@ const urlModel = defineModel<string>('url', { required: true })
   justify-content: center;
   align-items: center;
 
-  &:hover{
+  &:hover {
     background-color: #cadbeb;
   }
 }
