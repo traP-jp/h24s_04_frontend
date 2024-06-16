@@ -21,7 +21,7 @@ export const registerSlide = async (
     filepath: res.path
   }
 
-  await ky.post('/slides', { json: data })
+  await ky.post('/api/slides', { json: data })
 }
 
 export const uploadFile = async (file: File) => {
