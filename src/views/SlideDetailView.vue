@@ -126,7 +126,7 @@ const parseDatetime = (datetime: Date) => {
         <template v-if="!isEditMode">
           <a
             :download="`${slide.title}.pdf`"
-            :href="`/api/donwload/${slide.id}`"
+            :href="`/api/download/${slide.id}`"
             :class="$style.downloadLink"
           >
             <span>ダウンロード</span>
@@ -175,7 +175,7 @@ const parseDatetime = (datetime: Date) => {
           </a-button>
         </div>
       </div>
-      <SlideViewer :slide-url="`/api/donwload/${slide.id}`" :thumbnail="slide.thumb_url" />
+      <SlideViewer :slide-url="`/api/download/${slide.id}`" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>
