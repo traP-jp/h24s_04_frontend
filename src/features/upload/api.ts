@@ -23,7 +23,7 @@ export const registerSlide = async (
     filepath: res.path
   }
 
-  const res2: SlideDetail = await ky.post('/api/slides', { json: data })
+  const res2: SlideDetail = await ky.post('/api/slides', { json: data }).json()
   return res2.id
 }
 
