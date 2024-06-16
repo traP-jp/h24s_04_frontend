@@ -28,7 +28,7 @@ const idToGenre = (id: string) => {
     <li v-for="data in datalist" :key="data.title" :class="$style.slide">
       <router-link :to="`/slides/${data.id}`" :class="$style.slideLink">
         <div>
-          <img src="/slide.png" alt="スライド" :class="$style.image" />
+          <img :src="data.thumb_url" alt="スライド" :class="$style.image" />
         </div>
         <div :class="$style.letter">
           <div :class="$style.name">
