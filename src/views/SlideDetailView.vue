@@ -57,15 +57,15 @@ const handleSave = async () => {
   }
 }
 const handleDelete = async () => {
-  if (window.confirm('本当にこのスライドを削除しますか？')) {
-    try {
-      await deleteSlideDetail(id)
-      toast.success('スライドを削除しました')
-      router.push('/')
-    } catch (e) {
-      if (e instanceof Error) {
-        toast.error(`エラーが発生しました: ${e.message}`)
-      }
+  if (!window.confirm('本当にこのスライドを削除しますか？')) return
+
+  try {
+    await deleteSlideDetail(id)
+    toast.success('スライドを削除しました')
+    router.push('/')
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
     }
   }
 }
