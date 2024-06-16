@@ -44,14 +44,26 @@ const handleCancel = () => {
 }
 
 const handleSave = async () => {
-  await editSlideDetail(id, editedValue.value)
-  toast.success('変更を保存しました')
-  isEditMode.value = false
+  try {
+    await editSlideDetail(id, editedValue.value)
+    toast.success('変更を保存しました')
+    isEditMode.value = false
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 const handleDelete = async () => {
-  await deleteSlideDetail(id)
-  toast.success('スライドを削除しました')
-  router.push('/')
+  try {
+    await deleteSlideDetail(id)
+    toast.success('スライドを削除しました')
+    router.push('/')
+  } catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
 }
 
 const newFile = ref<File | null>(null)
