@@ -1,5 +1,3 @@
-import process from 'process'
-
 export const isDev = () => {
   console.log(process.env.NODE_ENV)
   return false
