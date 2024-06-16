@@ -10,17 +10,17 @@ import router from './router'
 const app = createApp(App)
 
 const options: PluginOptions = {
-    position: POSITION.BOTTOM_LEFT,
-    maxToasts: 5,
-    timeout: 3000,
-    closeButton: false,
-    pauseOnHover: false,
-    pauseOnFocusLoss: false,
-    hideProgressBar: true,
-    closeOnClick: false,
-    draggable: false,
-    transition: 'Vue-Toastification__fade'
-  }
+  position: POSITION.BOTTOM_LEFT,
+  maxToasts: 5,
+  timeout: 3000,
+  closeButton: false,
+  pauseOnHover: false,
+  pauseOnFocusLoss: false,
+  hideProgressBar: true,
+  closeOnClick: false,
+  draggable: false,
+  transition: 'Vue-Toastification__fade'
+}
 
 app.use(createPinia())
 app.use(router)
