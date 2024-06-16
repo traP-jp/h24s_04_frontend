@@ -1,5 +1,6 @@
 export interface Response {
-  url: string
+  dl_url: string
+  thumb_url: string
   path: string
 }
 
@@ -9,4 +10,5 @@ export interface Data {
   genre_id: string
   dl_url: string
   filepath: string
+  thumb_url: string
 }
