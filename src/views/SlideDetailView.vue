@@ -124,7 +124,11 @@ const parseDatetime = (datetime: Date) => {
       <input v-else v-model="editedValue.title" :class="$style.titleInput" />
       <div :class="$style.buttons">
         <template v-if="!isEditMode">
-          <a :download="`${slide.title}.pdf`" :href="slide.dl_url" :class="$style.downloadLink">
+          <a
+            :download="`${slide.title}.pdf`"
+            :href="`/api/donwload/${slide.id}`"
+            :class="$style.downloadLink"
+          >
             <span>ダウンロード</span>
             <a-icon name="mdi:tray-arrow-down" />
           </a>
@@ -171,7 +175,7 @@ const parseDatetime = (datetime: Date) => {
           </a-button>
         </div>
       </div>
-      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
+      <SlideViewer :slide-url="`/api/donwload/${slide.id}`" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>
