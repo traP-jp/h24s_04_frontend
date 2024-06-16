@@ -28,7 +28,7 @@ const idToGenre = (id: string) => {
     <li v-for="data in datalist" :key="data.title" :class="$style.slide">
       <router-link :to="`/slides/${data.id}`" :class="$style.slideLink">
         <div>
-          <img src="/slide.png" alt="スライド" :class="$style.image" />
+          <img :src="data.thumb_url" alt="スライド" :class="$style.image" />
         </div>
         <div :class="$style.letter">
           <div :class="$style.name">
@@ -52,7 +52,10 @@ const idToGenre = (id: string) => {
   flex-wrap: wrap;
   gap: 16px;
   list-style: none;
-  justify-content: center;
+
+  @media (width < 768px) {
+    justify-content: center;
+  }
 }
 .slide {
   display: flex;
@@ -107,6 +110,7 @@ const idToGenre = (id: string) => {
   font-size: 16px;
   color: #8d8d8d;
   word-break: break-all;
+  white-space: pre-wrap;
 }
 .genre {
   display: flex;

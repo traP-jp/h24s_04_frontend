@@ -87,9 +87,10 @@ const onDrop = async (acceptedFiles: File[]) => {
     }
     const imgSrc = canvas.toDataURL('image/png')
 
+
     const blob = dataURLToBlob(imgSrc)
-    const { url } = await uploadFile(file, blob)
-    editedValue.value.url = url
+    const { dl_url } = await uploadFile(file, blob)
+    editedValue.value.url = dl_url
   }catch (e) {
     if (e instanceof Error) {
       toast.error(`エラーが発生しました: ${e.message}`)
@@ -132,7 +133,7 @@ const handleUpload = async () => {
       </div>
     </div>
     <div :class="$style.infoContainer">
-      <p v-if="!isEditMode">{{ slide.description }}</p>
+      <p v-if="!isEditMode" :class="$style.description">{{ slide.description }}</p>
       <textarea v-else v-model="editedValue.description" :class="$style.textarea" />
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
@@ -161,7 +162,6 @@ const handleUpload = async () => {
           </a-button>
         </div>
       </div>
-      <!--TODO: slide.idからURL生成-->
       <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
     </div>
   </div>
@@ -261,5 +261,8 @@ const handleUpload = async () => {
 .uploadButtonContainer {
   display: flex;
   justify-content: flex-end;
+}
+.description {
+  white-space: pre-wrap;
 }
 </style>
