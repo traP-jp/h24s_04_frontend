@@ -63,12 +63,13 @@ const idToGenre = (id: string) => {
   border-radius: 16px;
   width: 292px;
   height: 344px;
-}
-.slide:hover {
-  background-color: #ececec;
-}
-.slide:active {
-  background-color: #ffffff;
+
+  &:hover {
+    background-color: #efefef;
+  }
+  &:active {
+    background-color: #dedede;
+  }
 }
 .image {
   width: 260px;

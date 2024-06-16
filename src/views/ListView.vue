@@ -158,12 +158,13 @@ const changeSort = () => {
   border-radius: 4px;
   border: 1px dotted;
   background: #ffffff;
-}
-.sort:hover {
-  background-color: #ececec;
-}
-.sort:active {
-  background-color: #ffffff;
+
+  &:hover {
+    background-color: #efefef;
+  }
+  &:active {
+    background-color: #dedede;
+  }
 }
 .search_title {
   width: 184px;
