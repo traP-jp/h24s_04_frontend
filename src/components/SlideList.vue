@@ -52,7 +52,10 @@ const idToGenre = (id: string) => {
   flex-wrap: wrap;
   gap: 16px;
   list-style: none;
-  justify-content: center;
+
+  @media (width < 768px) {
+    justify-content: center;
+  }
 }
 .slide {
   display: flex;
