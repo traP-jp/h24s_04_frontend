@@ -7,7 +7,7 @@ import 'vue-select/dist/vue-select.css'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
 
-export type SortType = 'asc' | 'desc'
+export type SortType = 'ASC' | 'DESC'
 
 const ascStr = '登録日で昇順ソート'
 const descStr = '登録日で降順ソート'
@@ -15,15 +15,15 @@ const genres = await fetchGenres()
 
 const selectedGenre = ref<string | null>(null)
 const selectedTitle = ref('')
-const sort = ref<SortType>('desc')
+const sort = ref<SortType>('DESC')
 const sortStr = ref(ascStr)
 
 const changeSort = () => {
-  if (sort.value === 'asc') {
-    sort.value = 'desc'
+  if (sort.value === 'ASC') {
+    sort.value = 'DESC'
     sortStr.value = ascStr
   } else {
-    sort.value = 'asc'
+    sort.value = 'ASC'
     sortStr.value = descStr
   }
 }
