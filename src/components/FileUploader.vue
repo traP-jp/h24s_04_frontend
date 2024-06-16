@@ -28,7 +28,7 @@ const urlModel = defineModel<string>('url', { required: true })
       <label for="upload">スライドの登録</label>
       <div v-bind="getRootProps()" :class="[$style.cursor, $style.box]">
         <input v-bind="getInputProps()" id="upload" />
-        <div>
+        <div :class="$style.upload">
           <a-icon name="mdi:tray-arrow-up" :class="$style.icon" />
           <p>アップロード</p>
         </div>
@@ -66,5 +66,10 @@ const urlModel = defineModel<string>('url', { required: true })
 }
 .left {
   padding-left: 80px;
+}
+.upload {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 </style>
