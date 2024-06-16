@@ -1,3 +1,4 @@
+import type { Data, Response } from './type'
 import ky from 'ky'
 
 export const registerSlide = async (
@@ -8,10 +9,15 @@ export const registerSlide = async (
 ) => {
   // 'multipart/form-data'
   const formData = new FormData()
-  formData.append('title', title)
-  formData.append('description', description)
-  formData.append('genre_id', selectedGenre)
-  formData.append('pdf', file)
+  formData.append('file', file)
+  const response: Response = await ky.post('/upload', { body: formData }).json()
 
-  await ky.post('/slides').json()
+  const data: Data = {
+    title: title,
+    description: description,
+    genre_id: selectedGenre,
+    url: response.url
+  }
+
+  await ky.post('/slides', { json: data })
 }
