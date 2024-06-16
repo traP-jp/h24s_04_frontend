@@ -1,15 +1,17 @@
 <script lang="ts" setup>
-import { useRoute } from 'vue-router';
-import {computed} from 'vue'
+import { useRoute } from 'vue-router'
+import { computed } from 'vue'
 
 const route = useRoute()
-const url = computed(()=>route.fullPath)
+const url = computed(() => route.fullPath)
 </script>
 
 <template>
   <header :class="$style.header">
     <router-link to="/" :aria-current="url === '/' ? 'page' : undefined">スライド一覧</router-link>
-    <router-link to="/upload" :aria-current="url === '/upload' ? 'page' : undefined">スライドの登録</router-link>
+    <router-link to="/upload" :aria-current="url === '/upload' ? 'page' : undefined"
+      >スライドの登録</router-link
+    >
   </header>
 </template>
 
@@ -30,7 +32,7 @@ const url = computed(()=>route.fullPath)
     &:hover {
       background-color: #f0f0f0;
     }
-    &[aria-current = 'page']{
+    &[aria-current='page'] {
       background-color: #f0f0f0;
     }
   }
