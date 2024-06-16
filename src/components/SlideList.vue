@@ -6,12 +6,11 @@ import AIcon from '@/components/AIcon.vue'
 import { fetchSlide } from '@/features/list/api'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
-import type { SortType } from '@/views/ListView.vue'
 
 const props = defineProps<{
-  sort: SortType
+  selectedGenre: string | null
 }>()
-const datalist = await fetchSlide(props.sort)
+const datalist = await fetchSlide(props.selectedGenre)
 const genres = await fetchGenres()
 
 const idToGenre = (id: string) => {
