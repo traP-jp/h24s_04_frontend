@@ -9,6 +9,7 @@ import { registerSlide } from '@/features/upload/api'
 import SlideViewer from '@/components/SlideViewer.vue'
 import AButton from '@/components/AButton.vue'
 import { useToast } from 'vue-toastification'
+import { dataURLToBlob } from '@/lib/blob'
 
 const genres = await fetchGenres()
 const toast = useToast()
@@ -24,7 +25,22 @@ const handleRegisterSlide = async () => {
     return
   }
   try {
-    await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
+    // 1枚目の画像を取得
+    const canvas = document.querySelector('canvas')
+    if (!canvas) {
+      throw new Error('canvas is undefined')
+    }
+    const imgSrc = canvas.toDataURL('image/png')
+
+    const blob = dataURLToBlob(imgSrc)
+    await registerSlide(
+      newTitle.value,
+      newExplanation.value,
+      selectedGenre.value,
+      newFile.value,
+      blob
+    )
+
     toast.success('スライドを登録しました')
   } catch (e) {
     if (e instanceof Error) {
