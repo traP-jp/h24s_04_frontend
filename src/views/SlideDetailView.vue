@@ -29,6 +29,8 @@ const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
   genrename: '不明'
 }
 
+const page = ref(1)
+
 const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
@@ -82,6 +84,7 @@ const onDrop = async (acceptedFiles: File[]) => {
   isSending.value = true
   try {
     // 1枚目の画像を取得
+    page.value = 1
     const canvas = document.querySelector('canvas')
     if (!canvas) {
       throw new Error('canvas is undefined')
@@ -175,7 +178,11 @@ const parseDatetime = (datetime: Date) => {
           </a-button>
         </div>
       </div>
-      <SlideViewer :slide-url="`/api/download/${slide.id}`" :thumbnail="slide.thumb_url" />
+      <SlideViewer
+        :slide-url="`/api/download/${slide.id}`"
+        :thumbnail="slide.thumb_url"
+        v-model="page"
+      />
     </div>
   </div>
 </template>

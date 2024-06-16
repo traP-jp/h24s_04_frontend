@@ -60,6 +60,10 @@ const urlModel = defineModel<string>('url', { required: true })
   display: flex;
   justify-content: center;
   align-items: center;
+
+  &:hover {
+    background-color: #cadbeb;
+  }
 }
 .space {
   padding-bottom: 20px;
