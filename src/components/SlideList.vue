@@ -64,6 +64,12 @@ const idToGenre = (id: string) => {
   width: 292px;
   height: 344px;
 }
+.slide:hover {
+  background-color: #ececec;
+}
+.slide:active {
+  background-color: #ffffff;
+}
 .image {
   width: 260px;
   height: 146px;

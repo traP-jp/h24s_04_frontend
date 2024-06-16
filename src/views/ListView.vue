@@ -143,8 +143,9 @@ const changeSort = () => {
   gap: 24px;
   align-items: baseline;
 
-  @media (width < 768px){
+  @media (width < 768px) {
     flex-direction: column-reverse;
+    gap: 13px;
   }
 }
 .sort {
