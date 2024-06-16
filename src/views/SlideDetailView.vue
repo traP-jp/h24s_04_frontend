@@ -24,13 +24,13 @@ const slide = await fetchSlideDetail(id)
 const genres = await fetchGenres()
 const genre: Genre = genres.find((genre) => genre.id === slide.genre_id) ?? {
   id: '0',
-  name: '不明'
+  genrename: '不明'
 }
 
 const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
-  description: slide.description,
+  description: slide.description.String,
   genre_id: slide.genre_id,
   url: slide.dl_url
 })
@@ -38,7 +38,7 @@ const editedValue = ref<SlideEditRequest>({
 const handleCancel = () => {
   editedValue.value = {
     title: slide.title,
-    description: slide.description,
+    description: slide.description.String,
     genre_id: slide.genre_id,
     url: slide.dl_url
   }
@@ -109,7 +109,7 @@ const handleUpload = async () => {
       </div>
     </div>
     <div :class="$style.infoContainer">
-      <p v-if="!isEditMode">{{ slide.description }}</p>
+      <p v-if="!isEditMode">{{ slide.description.String }}</p>
       <textarea v-else v-model="editedValue.description" :class="$style.textarea" />
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
@@ -117,7 +117,7 @@ const handleUpload = async () => {
         </div>
         <div v-if="!isEditMode" :class="$style.genre">
           <a-icon name="mdi:label" />
-          {{ genre.name }}
+          {{ genre.genrename }}
         </div>
         <v-select
           v-else
@@ -139,7 +139,7 @@ const handleUpload = async () => {
         </div>
       </div>
       <!--TODO: slide.idからURL生成-->
-      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
+      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url.String" />
     </div>
   </div>
 </template>
