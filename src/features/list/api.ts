@@ -1,4 +1,4 @@
-import { sleep } from '@/lib/mockUtils'
+import { isDev } from '@/lib/env'
 import type { Slide } from './type'
 import type { SortType } from '@/views/ListView.vue'
 import ky from 'ky'
@@ -8,10 +8,7 @@ export const fetchSlide = async (
   selectedGenre: string | null,
   sort: SortType
 ) => {
-  await sleep(1000)
-  console.log(selectedTitle, selectedGenre)
-
-  const datalist: Slide[] = [
+  const exampleSlides: Slide[] = [
     {
       id: '1',
       dl_url: 'https://example.com',
@@ -49,6 +46,9 @@ export const fetchSlide = async (
       description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     }
   ]
+  if (isDev()) {
+    return exampleSlides
+  }
 
   const params = new URLSearchParams()
   params.append('sort', sort)
@@ -57,7 +57,6 @@ export const fetchSlide = async (
     params.append('genre_id', selectedGenre)
   }
 
-  return datalist
-  const res: Slide[] = await ky.get(`/slides`, { searchParams: params }).json()
+  const res: Slide[] = await ky.get(`/api/slides`, { searchParams: params }).json()
   return res
 }

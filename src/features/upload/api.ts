@@ -1,3 +1,4 @@
+import { isDev } from '@/lib/env'
 import type { Data, Response } from './type'
 import ky from 'ky'
 
@@ -7,6 +8,9 @@ export const registerSlide = async (
   selectedGenre: string,
   file: File
 ) => {
+  if (isDev()) {
+    return
+  }
   const url = await uploadFile(file)
 
   const data: Data = {
@@ -20,10 +24,13 @@ export const registerSlide = async (
 }
 
 export const uploadFile = async (file: File) => {
+  if (isDev()) {
+    return 'https://example.com'
+  }
   const formData = new FormData()
   formData.append('file', file)
 
-  const response: Response = await ky.post('/upload', { body: formData }).json()
+  const response: Response = await ky.post('/api/upload', { body: formData }).json()
 
   return response.url
 }
