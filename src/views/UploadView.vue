@@ -7,6 +7,7 @@ import type { Genre } from '@/features/genres/type'
 import FileUploader from '@/components/FileUploader.vue'
 import { registerSlide } from '@/features/sendButton/api'
 import SlideViewer from '@/components/SlideViewer.vue'
+import AButton from '@/components/AButton.vue'
 
 const genres = await fetchGenres()
 
@@ -49,7 +50,9 @@ const handleRegisterSlide = async () => {
         </v-select>
       </label>
       <dev :class="$style.moreleft">
-        <button @click="handleRegisterSlide" :class="$style.button">スライドを登録</button>
+        <a-button @click="handleRegisterSlide" :class="$style.button" primary>
+          スライドを登録
+        </a-button>
       </dev>
     </div>
   </div>

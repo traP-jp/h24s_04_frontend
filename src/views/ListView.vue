@@ -174,7 +174,9 @@ const changeSort = () => {
   height: 43px;
   font-size: 16px;
   border-radius: 8px;
-  color: #8d8d8d;
   padding-left: 12px;
+
+  /**TODO: placeholderだけに設定 */
+  color: #8d8d8d;
 }
 </style>
