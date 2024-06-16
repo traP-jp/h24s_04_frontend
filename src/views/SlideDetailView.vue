@@ -90,7 +90,7 @@ const handleUpload = async () => {
         </template>
         <template v-else>
           <a-button iconName="mdi:cancel" @click="handleCancel" danger>キャンセル</a-button>
-          <a-button iconName="mdi:check" @click="handleSave">変更を保存</a-button>
+          <a-button iconName="mdi:check" @click="handleSave" primary>変更を保存</a-button>
         </template>
       </div>
     </div>
