@@ -36,7 +36,8 @@ const editedValue = ref<SlideEditRequest>({
   title: slide.title,
   description: slide.description,
   genre_id: slide.genre_id,
-  url: slide.dl_url
+  dl_url: slide.dl_url,
+  thumb_url: slide.thumb_url
 })
 
 const handleCancel = () => {
@@ -44,7 +45,8 @@ const handleCancel = () => {
     title: slide.title,
     description: slide.description,
     genre_id: slide.genre_id,
-    url: slide.dl_url
+    dl_url: slide.dl_url,
+    thumb_url: slide.thumb_url
   }
   isEditMode.value = false
 }
@@ -93,7 +95,7 @@ const onDrop = async (acceptedFiles: File[]) => {
 
     const blob = dataURLToBlob(imgSrc)
     const { dl_url } = await uploadFile(file, blob)
-    editedValue.value.url = dl_url
+    editedValue.value.dl_url = dl_url
   } catch (e) {
     if (e instanceof Error) {
       toast.error(`エラーが発生しました: ${e.message}`)

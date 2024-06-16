@@ -12,5 +12,6 @@ export interface SlideEditRequest {
   title: string
   genre_id: string
   description: string
-  url: string
+  thumb_url: string
+  dl_url: string
 }
