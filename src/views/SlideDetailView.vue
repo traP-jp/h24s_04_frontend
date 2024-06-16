@@ -13,6 +13,7 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
 import { useToast } from 'vue-toastification'
+import { uploadFile } from '@/features/upload/api'
 
 const toast = useToast()
 
@@ -31,14 +32,16 @@ const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
   description: slide.description,
-  genre_id: slide.genre_id
+  genre_id: slide.genre_id,
+  url: slide.dl_url
 })
 
 const handleCancel = () => {
   editedValue.value = {
     title: slide.title,
     description: slide.description,
-    genre_id: slide.genre_id
+    genre_id: slide.genre_id,
+    url: slide.dl_url
   }
   isEditMode.value = false
 }
@@ -66,10 +69,11 @@ const handleDelete = async () => {
   }
 }
 
-const newFile = ref<File | null>(null)
-const onDrop = (acceptedFiles: File[]) => {
+const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
-  newFile.value = file
+
+  const url = await uploadFile(file)
+  editedValue.value.url = url
 }
 
 const options = reactive({
@@ -82,7 +86,6 @@ const { getRootProps, getInputProps, open } = useDropzone(options)
 
 const handleUpload = async () => {
   open?.()
-  // アップロードタイミング要検討
 }
 </script>
 
