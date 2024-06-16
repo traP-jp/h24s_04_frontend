@@ -21,6 +21,7 @@ const newTitle = ref('')
 const newExplanation = ref('')
 const newFile = ref<File | null>(null)
 const url = ref('')
+const page = ref(1)
 const isSending = ref(false)
 
 const handleRegisterSlide = async () => {
@@ -31,6 +32,7 @@ const handleRegisterSlide = async () => {
 
   try {
     // 1枚目の画像を取得
+    page.value = 1
     const canvas = document.querySelector('canvas')
     if (!canvas) {
       throw new Error('canvas is undefined')
@@ -60,7 +62,7 @@ const handleRegisterSlide = async () => {
 <template>
   <div :class="$style.page">
     <File-uploader v-model:file="newFile" v-model:url="url" />
-    <SlideViewer v-if="url !== ''" :slideUrl="url" />
+    <SlideViewer v-if="url !== ''" :slideUrl="url" v-model="page" />
     <div :class="[$style.gap, $style.left]">
       <label :class="$style.container">
         タイトル

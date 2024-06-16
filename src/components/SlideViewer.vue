@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { VuePDF, usePDF } from '@tato30/vue-pdf'
-import { ref } from 'vue'
 import AIcon from '@/components/AIcon.vue'
 
 const props = defineProps<{
@@ -13,25 +12,21 @@ const { pdf, pages } = usePDF({
   cMapUrl: '/cmaps/'
 })
 
-const currentSlideNum = ref(1)
+// currentPageNum
+const model = defineModel<number>({ required: true })
 </script>
 
 <template>
   <div :class="$style.container">
     <div :class="$style.viewer">
       <div :class="$style.buttonContainer" data-direction="left">
-        <button
-          :class="$style.button"
-          @click="currentSlideNum--"
-          v-if="currentSlideNum !== 1"
-          data-direction="left"
-        >
+        <button :class="$style.button" @click="model--" v-if="model !== 1" data-direction="left">
           <a-icon name="mdi:arrow-left-circle" :size="48" />
         </button>
       </div>
-      <VuePDF :width="841" :height="595" :pdf="pdf" :page="currentSlideNum">
+      <VuePDF :width="841" :height="595" :pdf="pdf" :page="model">
         <img
-          v-if="currentSlideNum === 1 && thumbnail !== undefined"
+          v-if="model === 1 && thumbnail !== undefined"
           :width="841"
           :height="595"
           alt="1ページ目"
@@ -41,15 +36,15 @@ const currentSlideNum = ref(1)
       <div :class="$style.buttonContainer" data-direction="right">
         <button
           :class="$style.button"
-          @click="currentSlideNum++"
-          v-if="currentSlideNum !== pages"
+          @click="model++"
+          v-if="model !== pages"
           data-direction="right"
         >
           <a-icon name="mdi:arrow-right-circle" :size="48" />
         </button>
       </div>
     </div>
-    <div>{{ currentSlideNum }}/{{ pages }}</div>
+    <div>{{ model }}/{{ pages }}</div>
   </div>
 </template>
 
