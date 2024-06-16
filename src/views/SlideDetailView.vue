@@ -97,6 +97,11 @@ const { getRootProps, getInputProps, open } = useDropzone(options)
 const handleUpload = async () => {
   open?.()
 }
+
+const parseDatetime = (datetime: Date) => {
+  const date = new Date(datetime)
+  return `${date.getFullYear()}/${(date.getMonth() + 1).toString().padStart(2, '0')}/${date.getDate().toString().padStart(2, '0')} ${date.getHours().toString().padStart(2, '0')}:${date.getMinutes().toString().padStart(2, '0')}`
+}
 </script>
 
 <template>
@@ -124,7 +129,7 @@ const handleUpload = async () => {
       <textarea v-else v-model="editedValue.description" :class="$style.textarea" />
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
-          <time :datetime="slide.posted_at">{{ slide.posted_at }}</time>
+          <time :datetime="slide.posted_at">{{ parseDatetime(new Date(slide.posted_at)) }}</time>
         </div>
         <div v-if="!isEditMode" :class="$style.genre">
           <a-icon name="mdi:label" />
@@ -251,5 +256,6 @@ const handleUpload = async () => {
 }
 .description {
   white-space: pre-wrap;
+  word-break: break-all;
 }
 </style>
