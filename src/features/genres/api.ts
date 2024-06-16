@@ -1,4 +1,4 @@
-import { sleep } from '@/lib/mockUtils'
+import { isDev } from '@/lib/env'
 import type { Genre } from './type'
 import ky from 'ky'
 
@@ -22,9 +22,9 @@ const sampleGenres: Genre[] = [
 ]
 
 export const fetchGenres = async () => {
-  await sleep(1000)
-  return sampleGenres
-
-  const res: Genre[] = await ky.get('/genres').json()
+  if (isDev()) {
+    return sampleGenres
+  }
+  const res: Genre[] = await ky.get('/api/genres').json()
   return res
 }

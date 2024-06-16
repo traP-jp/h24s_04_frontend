@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { deleteSlideDetail, editSlideDetail, fetchSlideDetail } from '@/features/slideDetail/api'
-import UserIcon from '@/components/UserIcon.vue'
 import AIcon from '@/components/AIcon.vue'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
@@ -13,6 +12,7 @@ import vSelect from 'vue-select'
 import 'vue-select/dist/vue-select.css'
 import { useDropzone } from 'vue3-dropzone'
 import { useToast } from 'vue-toastification'
+import { uploadFile } from '@/features/upload/api'
 
 const toast = useToast()
 
@@ -31,14 +31,16 @@ const isEditMode = ref(false)
 const editedValue = ref<SlideEditRequest>({
   title: slide.title,
   description: slide.description,
-  genre_id: slide.genre_id
+  genre_id: slide.genre_id,
+  url: slide.dl_url
 })
 
 const handleCancel = () => {
   editedValue.value = {
     title: slide.title,
     description: slide.description,
-    genre_id: slide.genre_id
+    genre_id: slide.genre_id,
+    url: slide.dl_url
   }
   isEditMode.value = false
 }
@@ -66,10 +68,11 @@ const handleDelete = async () => {
   }
 }
 
-const newFile = ref<File | null>(null)
-const onDrop = (acceptedFiles: File[]) => {
+const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
-  newFile.value = file
+
+  const { url } = await uploadFile(file)
+  editedValue.value.url = url
 }
 
 const options = reactive({
@@ -82,7 +85,6 @@ const { getRootProps, getInputProps, open } = useDropzone(options)
 
 const handleUpload = async () => {
   open?.()
-  // アップロードタイミング要検討
 }
 </script>
 
@@ -112,11 +114,6 @@ const handleUpload = async () => {
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
           <time :datetime="slide.posted_at">{{ slide.posted_at }}</time>
-          <!--TODO: usernameどうするか決まったら修正-->
-          <div :class="$style.user">
-            <user-icon user-name="mehm8128" />
-            <span>mehm8128</span>
-          </div>
         </div>
         <div v-if="!isEditMode" :class="$style.genre">
           <a-icon name="mdi:label" />
@@ -142,7 +139,7 @@ const handleUpload = async () => {
         </div>
       </div>
       <!--TODO: slide.idからURL生成-->
-      <SlideViewer :slide-url="`/slide.pdf`" :thumbnail="slide.thumb_url" />
+      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>

@@ -155,6 +155,7 @@ const changeSort = () => {
   align-items: center;
   width: 184px;
   height: 33px;
+  padding: 4px;
   border-radius: 4px;
   border: 1px dotted;
   background: #ffffff;
@@ -170,7 +171,6 @@ const changeSort = () => {
   width: 184px;
   height: 35px;
   font-size: 16px;
-  border-width: 1px;
   border-radius: 8px;
   padding-left: 12px;
   border: 1px solid;
