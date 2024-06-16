@@ -19,7 +19,7 @@ export const fetchSlideDetail = async (id: string) => {
     return slide
   }
 
-  const res: SlideDetail = await ky.get(`/slides/${id}`).json()
+  const res: SlideDetail = await ky.get(`/api/slides/${id}`).json()
   return res
 }
 
