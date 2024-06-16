@@ -7,8 +7,10 @@ import type { Genre } from '@/features/genres/type'
 import FileUploader from '@/components/FileUploader.vue'
 import { registerSlide } from '@/features/sendButton/api'
 import SlideViewer from '@/components/SlideViewer.vue'
+import { useToast } from 'vue-toastification'
 
 const genres = await fetchGenres()
+const toast = useToast()
 
 const selectedGenre = ref(null)
 const newTitle = ref('')
@@ -21,6 +23,7 @@ const handleRegisterSlide = async () => {
     return
   }
   await registerSlide(newTitle.value, newExplanation.value, selectedGenre.value, newFile.value)
+  toast.success('スライドを登録しました')
 }
 </script>
 
