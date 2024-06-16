@@ -6,11 +6,14 @@ export const fetchSlideDetail = async (id: string) => {
   const slide: SlideDetail = {
     id: '1',
     dl_url: '/slide.pdf',
-    thumb_url: '/slide.png',
+    thumb_url: { String: '/slide.png', Valid: true },
     title: 'なろう講習会第一回',
     genre_id: '1',
     posted_at: '2021-10-01T00:00:00.000Z',
-    description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
+    description: {
+      String: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。',
+      Valid: true
+    }
   }
   if (isDev()) {
     return slide

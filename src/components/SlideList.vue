@@ -19,9 +19,9 @@ const genres = await fetchGenres()
 const idToGenre = (id: string) => {
   const genre: Genre = genres.find((genre) => genre.id === id) ?? {
     id: '0',
-    name: '不明'
+    genrename: '不明'
   }
-  return genre.name
+  return genre.genrename
 }
 </script>
 
@@ -35,7 +35,7 @@ const idToGenre = (id: string) => {
         <div :class="$style.letter">
           <div :class="$style.name">
             <div :class="$style.title">{{ data.title }}</div>
-            <div :class="$style.desc">{{ data.description }}</div>
+            <div :class="$style.desc">{{ data.description.String }}</div>
           </div>
           <div :class="$style.genre">
             <a-icon name="mdi:label" />

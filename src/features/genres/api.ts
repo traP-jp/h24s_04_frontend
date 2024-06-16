@@ -5,19 +5,19 @@ import ky from 'ky'
 const sampleGenres: Genre[] = [
   {
     id: '1',
-    name: 'SysAd'
+    genrename: 'SysAd'
   },
   {
     id: '2',
-    name: 'Game'
+    genrename: 'Game'
   },
   {
     id: '3',
-    name: '講習会'
+    genrename: '講習会'
   },
   {
     id: '4',
-    name: 'らんぷろ'
+    genrename: 'らんぷろ'
   }
 ]
 
