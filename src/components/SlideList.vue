@@ -9,11 +9,9 @@ import type { Genre } from '@/features/genres/type'
 import type { SortType } from '@/views/ListView.vue'
 
 const props = defineProps<{
-  selectedTitle: string
-  selectedGenre: string | null
   sort: SortType
 }>()
-const datalist = await fetchSlide(props.selectedTitle, props.selectedGenre, props.sort)
+const datalist = await fetchSlide(props.sort)
 const genres = await fetchGenres()
 
 const idToGenre = (id: string) => {

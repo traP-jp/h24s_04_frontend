@@ -33,7 +33,7 @@ const changeSort = () => {
   <div :class="$style.page">
     <h1 :class="$style.toptitle">スライド一覧</h1>
     <div :class="$style.search">
-      <div>
+      <!-- <div>
         <v-select
           :options="genres"
           v-model="selectedGenre"
@@ -51,7 +51,7 @@ const changeSort = () => {
           placeholder="タイトルで検索"
           :class="$style.search_title"
         />
-      </div>
+      </div> -->
       <div>
         <button @click="changeSort" :class="$style.sort">
           {{ sortStr }}
@@ -62,12 +62,15 @@ const changeSort = () => {
     </div>
     <suspense>
       <template #default>
-        <SlideList
+        <!-- <SlideList
           :key="[selectedTitle, selectedGenre, sort].join()"
           :selectedTitle="selectedTitle"
           :selectedGenre="selectedGenre"
           :sort="sort"
-        />
+        /> -->
+        <SlideList 
+          :key="[sort].join()"
+          :sort="sort"/>
       </template>
       <template #fallback> loading... </template>
     </suspense>
