@@ -52,7 +52,7 @@ export const fetchSlide = async (sort: SortType) => {
   // if (selectedGenre !== null) {
   //   params.append('genre_id', selectedGenre)
   // }
-  params.append('orderby', 'posted_at')
+  params.append('key', 'posted_at')
   params.append('sortorder', sort)
 
   const res: Slide[] = await ky.get(`/api/slides`, { searchParams: params }).json()
