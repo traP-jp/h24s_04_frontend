@@ -142,22 +142,30 @@ const changeSort = () => {
   flex-direction: row-reverse;
   gap: 24px;
   align-items: baseline;
+
+  @media (width < 768px) {
+    flex-direction: column-reverse;
+    gap: 13px;
+  }
 }
 .sort {
   font-size: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 184px;
+  height: 33px;
   padding: 4px;
   border-radius: 4px;
   border: 1px dotted;
   background: #ffffff;
-}
-.sort:hover {
-  background-color: #ececec;
-}
-.sort:active {
-  background-color: #ffffff;
+
+  &:hover {
+    background-color: #efefef;
+  }
+  &:active {
+    background-color: #dedede;
+  }
 }
 .search_title {
   width: 184px;
@@ -168,11 +176,10 @@ const changeSort = () => {
   border: 1px solid;
 }
 .search_genre {
-  width: 188px;
+  width: 184px;
   height: 43px;
   font-size: 16px;
   border-radius: 8px;
-  padding-left: 12px;
 
   /**TODO: placeholderだけに設定 */
   color: #8d8d8d;

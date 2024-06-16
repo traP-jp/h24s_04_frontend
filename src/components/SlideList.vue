@@ -54,6 +54,7 @@ const idToGenre = (id: string) => {
   flex-wrap: wrap;
   gap: 16px;
   list-style: none;
+  justify-content: center;
 }
 .slide {
   display: flex;
@@ -63,6 +64,13 @@ const idToGenre = (id: string) => {
   border-radius: 16px;
   width: 292px;
   height: 344px;
+
+  &:hover {
+    background-color: #efefef;
+  }
+  &:active {
+    background-color: #dedede;
+  }
 }
 .slide:hover {
   background-color: #efefef;
