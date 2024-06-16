@@ -23,7 +23,7 @@ export const uploadFile = async (file: File) => {
   const formData = new FormData()
   formData.append('file', file)
 
-  const response: Response = await ky.post('/upload', { body: formData }).json()
+  const response: Response = await ky.post('/api/upload', { body: formData }).json()
 
   return response.url
 }
