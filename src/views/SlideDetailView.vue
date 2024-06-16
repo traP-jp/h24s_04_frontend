@@ -79,16 +79,23 @@ const handleDelete = async () => {
 const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
 
-  // 1枚目の画像を取得
-  const canvas = document.querySelector('canvas')
-  if (!canvas) {
-    throw new Error('canvas is undefined')
-  }
-  const imgSrc = canvas.toDataURL('image/png')
+  isSending.value = true
+  try {// 1枚目の画像を取得
+    const canvas = document.querySelector('canvas')
+    if (!canvas) {
+      throw new Error('canvas is undefined')
+    }
+    const imgSrc = canvas.toDataURL('image/png')
 
-  const blob = dataURLToBlob(imgSrc)
-  const { url } = await uploadFile(file, blob)
-  editedValue.value.url = url
+    const blob = dataURLToBlob(imgSrc)
+    const { url } = await uploadFile(file, blob)
+    editedValue.value.url = url
+  }catch (e) {
+    if (e instanceof Error) {
+      toast.error(`エラーが発生しました: ${e.message}`)
+    }
+  }
+  isSending.value = false
 }
 
 const options = reactive({
@@ -149,7 +156,7 @@ const handleUpload = async () => {
       <div :class="$style.uploadButtonContainer" v-if="isEditMode">
         <div v-bind="getRootProps()">
           <input v-bind="getInputProps()" />
-          <a-button @click="handleUpload" iconName="mdi:tray-arrow-up">
+          <a-button :disabled="isSending" @click="handleUpload" iconName="mdi:tray-arrow-up">
             スライドの再アップロード
           </a-button>
         </div>
