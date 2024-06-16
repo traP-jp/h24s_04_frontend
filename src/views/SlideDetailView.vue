@@ -149,7 +149,6 @@ const handleUpload = async () => {
           </a-button>
         </div>
       </div>
-      <!--TODO: slide.idからURL生成-->
       <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
     </div>
   </div>

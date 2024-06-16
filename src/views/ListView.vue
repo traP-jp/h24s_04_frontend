@@ -181,8 +181,6 @@ const changeSort = () => {
   height: 43px;
   font-size: 16px;
   border-radius: 8px;
-
-  /**TODO: placeholderだけに設定 */
-  color: #8d8d8d;
+  --vs-search-input-placeholder-color: #8d8d8d;
 }
 </style>
