@@ -57,6 +57,8 @@ const handleSave = async () => {
   }
 }
 const handleDelete = async () => {
+  if (!window.confirm('本当にこのスライドを削除しますか？')) return
+
   try {
     await deleteSlideDetail(id)
     toast.success('スライドを削除しました')
