@@ -55,8 +55,8 @@ const urlModel = defineModel<string>('url', { required: true })
   height: 280px;
   width: 500px;
   border-radius: 16px;
-  border: 1px solid #000000;
-  background-color: #d9d9d9;
+  border: 2px dashed #90bfeb;
+  background-color: #ffffff;
   display: flex;
   justify-content: center;
   align-items: center;
