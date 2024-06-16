@@ -71,7 +71,7 @@ const handleDelete = async () => {
 const onDrop = async (acceptedFiles: File[]) => {
   const file = acceptedFiles[0]
 
-  const url = await uploadFile(file)
+  const { url } = await uploadFile(file)
   editedValue.value.url = url
 }
 
