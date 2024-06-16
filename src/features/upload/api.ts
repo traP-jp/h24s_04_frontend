@@ -11,13 +11,14 @@ export const registerSlide = async (
   if (isDev()) {
     return
   }
-  const url = await uploadFile(file)
+  const res = await uploadFile(file)
 
   const data: Data = {
-    title: title,
-    description: description,
+    title,
+    description,
     genre_id: selectedGenre,
-    url: url
+    dl_url: res.url,
+    filepath: res.path
   }
 
   await ky.post('/slides', { json: data })
@@ -25,12 +26,15 @@ export const registerSlide = async (
 
 export const uploadFile = async (file: File) => {
   if (isDev()) {
-    return 'https://example.com'
+    return {
+      url: 'https://example.com',
+      path: 'https://example.com'
+    } satisfies Response
   }
   const formData = new FormData()
   formData.append('file', file)
 
   const response: Response = await ky.post('/api/upload', { body: formData }).json()
 
-  return response.url
+  return response
 }

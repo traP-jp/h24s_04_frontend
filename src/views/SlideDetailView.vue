@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { deleteSlideDetail, editSlideDetail, fetchSlideDetail } from '@/features/slideDetail/api'
-import UserIcon from '@/components/UserIcon.vue'
 import AIcon from '@/components/AIcon.vue'
 import { fetchGenres } from '@/features/genres/api'
 import type { Genre } from '@/features/genres/type'
@@ -115,11 +114,6 @@ const handleUpload = async () => {
       <div :class="$style.innerInfoContainer">
         <div :class="$style.meta">
           <time :datetime="slide.posted_at">{{ slide.posted_at }}</time>
-          <!--TODO: usernameどうするか決まったら修正-->
-          <div :class="$style.user">
-            <user-icon user-name="mehm8128" />
-            <span>mehm8128</span>
-          </div>
         </div>
         <div v-if="!isEditMode" :class="$style.genre">
           <a-icon name="mdi:label" />
@@ -145,7 +139,7 @@ const handleUpload = async () => {
         </div>
       </div>
       <!--TODO: slide.idからURL生成-->
-      <SlideViewer :slide-url="`/slide.pdf`" :thumbnail="slide.thumb_url" />
+      <SlideViewer :slide-url="slide.dl_url" :thumbnail="slide.thumb_url" />
     </div>
   </div>
 </template>
