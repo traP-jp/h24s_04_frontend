@@ -8,50 +8,38 @@ export const fetchSlide = async (sort: SortType) => {
     {
       id: '1',
       dl_url: 'https://example.com',
-      thumb_url: { String: 'https://example.com', Valid: true },
+      thumb_url: 'https://example.com',
       title: 'なろう講習会第一回',
       genre_id: '1',
       posted_at: '2021-10-01T00:00:00.000Z',
-      description: {
-        String: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。',
-        Valid: true
-      }
+      description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     },
     {
       id: '1',
       dl_url: 'https://example.com',
-      thumb_url: { String: 'https://example.com', Valid: true },
+      thumb_url: 'https://example.com',
       title: 'なろう講習会第一回',
       genre_id: '1',
       posted_at: '2021-10-01T00:00:00.000Z',
-      description: {
-        String: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。',
-        Valid: true
-      }
+      description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     },
     {
       id: '1',
       dl_url: 'https://example.com',
-      thumb_url: { String: 'https://example.com', Valid: true },
+      thumb_url: 'https://example.com',
       title: 'なろう講習会第一回',
       genre_id: '1',
       posted_at: '2021-10-01T00:00:00.000Z',
-      description: {
-        String: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。',
-        Valid: true
-      }
+      description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     },
     {
       id: '1',
       dl_url: 'https://example.com',
-      thumb_url: { String: 'https://example.com', Valid: true },
+      thumb_url: 'https://example.com',
       title: 'なろう講習会第一回',
       genre_id: '1',
       posted_at: '2021-10-01T00:00:00.000Z',
-      description: {
-        String: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。',
-        Valid: true
-      }
+      description: 'なろう講習会の第一回のスライド。Webアプリの基本的な概念を説明しています。'
     }
   ]
   if (isDev()) {
